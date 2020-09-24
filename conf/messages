@@ -1,0 +1,19 @@
+# You can specialize this file for each language.
+# For example, for French create a messages.fr file
+#
+status1=Aguardando Pagamento
+status2=Aguardando Envio
+status3=Enviado
+status4=Concluido
+status5=Cancelado
+
+#categorias
+Feminina= Moda Feminina
+Masculina= Moda Masculina
+Esporte=Esporte e Lazer 
+Telefones=Telefones e Acessorios
+Informatica=Informática
+Eletronicos=Eletronicos
+Casa=Casa e Jardim 
+Automoveis=Automóveis e Motocicletas
+Beleza=Beleza e Saúde

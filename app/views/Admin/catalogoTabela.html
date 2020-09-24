@@ -1,0 +1,67 @@
+#{extends 'templateCoreano.html'/}
+   <style>
+  .titulo{
+   font-size: 16px;
+   font-weight: 600;
+   }
+   </style>
+	
+	
+<section id="cart_items">
+		<div class="container">
+			<div class="row">
+					
+				<div class="col-sm-12 padding-right">
+				 <div class="wrapper wrapper-content">
+   <div class="ibox-content">
+				<table class="table table-hover no-margins">
+					<thead>
+						<tr class="cart_menu">
+							<td class="titulo">Item</td>
+							<td class="titulo">Titulo/Referencia</td>
+							
+							<td class="titulo">Preço</td>
+							<td class="titulo">Quantidade</td>
+							<td class="titulo">Marca</td>
+							
+						</tr>
+					</thead>
+					<tbody>
+						#{list items:listaProdutos, as:'product'} 
+						<tr>
+							<td class="cart_product ">
+								<img src="${product?.pro_caminho_ima}" width="80px" alt="">
+							</td>
+							
+							<td class="cart_description">
+								<h4>${product?.pro_titulo}</h4>
+								<p>Referência: ${product?.pro_referencia}</p>
+							</td>
+							<td class="cart_price">
+								<p  style="color: red;">R$ ${product?.pro_preco}</p>
+							</td>
+							<td class="cart_quantity">
+								
+									<p>${product?.pro_quantidade}</p>
+								
+							
+						</td>
+							<td class="cart_total">
+							   ${product?.pro_marca}
+							</td>
+							
+						</tr>
+						  #{/list} 
+					</tbody>
+				</table>
+				
+			</div>
+				</div><!--features_items-->
+				
+					
+				
+				</div>
+			</div>
+		</div>
+	</section>
+  

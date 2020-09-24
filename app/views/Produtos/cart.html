@@ -1,0 +1,357 @@
+#{extends 'template.html'/}
+  <style>
+  #cart_items .cart_info .menu-conta {
+    background: #eee;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+}
+
+.register-req, .heading {
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 10%;
+    margin-bottom: 25px;
+    padding: 0px 25px;
+    font-family: 'Roboto', sans-serif;
+}
+.ibox-content {
+    background-color: #ffffff;
+    color: inherit;
+    padding: 15px 20px 20px 20px;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 0px;
+}
+</style>
+
+	<section id="cart_items">
+		<div class="container">
+		
+				<h2 class="heading">Seu Carrinho de Compras</h2>
+			
+			<div class="table-responsive cart_info ibox-content">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="menu-conta">
+							<td class="image">Item</td>
+							<td class="description"></td>
+							<td class="price">Preço</td>
+							<td class="quantity">Quantidade</td>
+							<td class="totalt">Total</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						 #{list items:lista, as:'product'}
+						<tr>
+							<td>
+								<a href=""><img src="${product?.car_caminho_ima}" width="80px" alt=""></a>
+							</td>
+							<td class="cart_description">
+								<h4><a href="@{Application.productDetails(product.pro_codigo)}">${product?.car_titulo}</a></h4>
+								<p>Referencia: ${product?.car_referencia}</p>
+									
+							</td>
+							<td style="color: red;" class="cart_price">
+							<input type="hidden" class="preco" value="${product?.car_preco}" size="2"/>
+								<p  >R$ ${product?.car_preco}</p>
+							</td>
+							<td class="cart_quantity">
+							<div class=" cart_quantity_button">
+								<form id="formreduz">
+									<input type="hidden" class="plus" name="plus" id="plus" value="${product?.car_codigo}" size="2"/>
+									<a class="ddd" href="#">-</a>
+								</form>
+								
+									<input type="text" name="cart.car_quantidade" class="quntity-input cart_quantity_input" value="${product?.car_quantidade}" size="2"/>
+								<form id="formaumento">
+									<input type="hidden" class="plus" name="plus" id="plus" value="${product?.car_codigo}" size="2"/>
+									<a class="ddd" href="#">+</a>
+									</form>
+								
+							</div>
+						</td>
+							<td class="cart_total">
+								<p class="cart_total_price valor"  style="color: red;" >R$ ${product?.car_preco}</p>
+							</td>
+							<td class="cart_delete">
+								<a class="cart_quantity_delete" href="@{Produtos.removeItemCart(product)}"><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+						   #{/list}
+					</tbody>
+				</table>
+			</div>
+			
+							
+							
+		</div>
+	</section> <!--/#cart_items-->
+
+	<section>
+		
+		<div class="container shipp">
+				<form id="formpro">
+		 <div><strong>Escolha que tipo de envio você deseja</strong>
+					<input type="radio"  name="gender" value="PAC"> PAC
+					<input type="radio"  name="gender" value="SEDEX"> SEDEX
+					<input type="radio"  name="gender" value="VALE" checked> Vale Entregas
+					<input type="radio"  name="gender" value="RETIRADA"> Retirar em Parceiro
+					
+					<input type="hidden" value="VALE" id="tipo_frete" name="tipo_frete" >	 
+								CEP:
+								<input placeholder="CEP"  name="rev_texto" id="inp" type="text">
+								<input type="submit" class="btn btn-default" value="Calcular">
+						<ul id="bars">
+ 
+						</ul>
+						
+			</div></form>
+						
+			
+		<form action="@{Produtos.makeCheckout()}">
+			
+		<input type="hidden" value="VALE" id="tipofrete" name="ped_codigo_frete" >	
+		<input type="hidden" value="${pedido?.ped_codigo}" name="ped_codigo" >
+			<div>
+				<h3>Se o seu pedido estiver correto prossiga para o checkout ;)</h3>
+			
+			</div>
+			<div class="row margem-esquerda">
+				<div class="col-sm-9">
+					
+					#{if endereco}  
+					
+					<div class="col-sm-8 clearfix">
+						<div class="bill-to">
+							<p>Enviar para</p>
+							<div class="form-one">
+								<input type="hidden" value="${endereco?.end_codigo}" name="endereco.end_codigo" >
+									<input type="text" readonly="readonly"  value="${endereco?.end_nome}" name="endereco.end_nome" placeholder="Nome">
+									<input type="text" readonly="readonly"  value="${endereco?.end_email}" name="endereco.end_email" placeholder="Email*">
+									<input type="text" readonly="readonly"  value="${endereco?.end_endereco1}" name="endereco.end_endereco1" placeholder="Endereço *">
+									<input type="text" readonly="readonly"  value="${endereco?.end_endereco2}" name="endereco.end_endereco2" placeholder=" Complemento ">
+								
+							</div>
+							<div class="form-two">
+								<input type="text" readonly="readonly"  value="${endereco?.end_cep}" name="endereco.end_cep" placeholder="CEP *">
+									
+									
+									<select >
+										
+										<option>${endereco?.end_cidade}</option>
+										
+										
+									</select> 
+									
+									<input type="hidden" value="${endereco?.end_estado}" name="endereco.end_estado">
+								<select>
+										
+										<option >${endereco?.end_estado}</option>
+										
+										
+									</select> <input readonly="readonly"  value="${endereco?.end_celular}" name="endereco.end_celular" type="text" placeholder="Celular *">
+								
+								
+							</div>
+						</div>
+						
+					</div>
+					
+					#{/if}
+	
+	#{else} 
+					
+					
+					<div class="col-sm-8 clearfix">
+						<div class="bill-to">
+							<p>Enviar para</p>
+							<div class="form-one">
+								<input type="hidden" value="${endereco?.end_codigo}" name="endereco.end_codigo" >
+										<input type="text" required value="${endereco?.end_nome}" name="endereco.end_nome" placeholder="Nome">
+									<input type="text" required value="${endereco?.end_email}" name="endereco.end_email" placeholder="Email*">
+									<input type="text" required value="${endereco?.end_endereco1}" name="endereco.end_endereco1" placeholder="Endereço *">
+									<input type="text"  value="${endereco?.end_endereco2}" name="endereco.end_endereco2" placeholder="Complemento">
+								
+							</div>
+							
+							
+							<div class="form-two">
+								
+									<input type="text" required value="${endereco?.end_cep}" name="endereco.end_cep" placeholder="CEP *">
+									<select value="${endereco?.end_cidade}" name="endereco.end_cidade" >
+										<option value="Tabuleiro do Norte">Tabuleiro do Norte</option>
+										<option value="Limoeiro do Norte">Limoeiro do Norte</option>
+										<option value="São João do Jaguaribe">São João do Jaguaribe</option>
+										<option value="Fortaleza">Fortaleza</option>
+										
+									</select> 
+									
+									<select value="${endereco?.end_estado}" name="endereco.end_estado">
+									<option>-- Estado --</option>
+									<option value="AC">Acre</option>
+									<option value="AL">Alagoas</option>
+									<option value="AP">Amapá</option>
+									<option value="AM">Amazonas</option>
+									<option value="BA">Bahia</option>
+									<option value="CE">Ceará</option>
+									<option value="DF">Distrito Federal</option>
+									<option value="ES">Espirito Santo</option>
+									<option value="GO">Goiás</option>
+									<option value="MA">Maranhão</option>
+									<option value="MS">Mato Grosso do Sul</option>
+									<option value="MT">Mato Grosso</option>
+									<option value="MG">Minas Gerais</option>
+									<option value="PA">Pará</option>
+									<option value="PB">Paraíba</option>
+									<option value="PR">Paraná</option>
+									<option value="PE">Pernambuco</option>
+									<option value="PI">Piauí</option>
+									<option value="RJ">Rio de Janeiro</option>
+									<option value="RN">Rio Grande do Norte</option>
+									<option value="RS">Rio Grande do Sul</option>
+									<option value="RO">Rondônia</option>
+									<option value="RR">Roraima</option>
+									<option value="SC">Santa Catarina</option>
+									<option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+
+								</select> <input type="text"value="${endereco?.end_celular}" required  name="endereco.end_celular" placeholder="Celular *">
+								
+								
+							</div>
+							
+							
+						</div>
+					</div>
+					
+					 #{/else} 
+					 
+					<div class="col-sm-4">
+						<div class="order-message">
+							<p>Informações Adicionais</p>
+							<textarea name="endereco.end_info_adicional"  placeholder="Notas sobre seu pedido, Notas especiais para entrega" rows="4"></textarea>
+							
+						</div>	
+					</div>	
+					
+					
+				</div>
+				<div class="col-sm-3">
+					<div class="total_area">
+						<ul>
+							<li> Sub Total <span  class="subtotal">$00</span></li>
+						
+							<li>Custo de Envio<span class="frete">4.00</span></li>
+							<li>Total <span class="total">$00</span></li>
+						</ul>
+						
+						
+							
+							 <input type="submit" class="btn btn-default check_out" value="Conferir e Pagar" >
+							<a href="@{Application.index()}" class="btn btn-default check_out"><i class="fa fa-shopping-cart"></i> Continuar Comprando</a>
+					</div>
+				</div>
+			</div>
+			</form>
+		</div>
+		
+	</section><!--/#do_action-->
+
+<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+ <script type = "text/javascript">
+
+   
+	
+$(document).ready(function() {
+	 $(".menuTopCart").css("color", "pink");
+	 var total = 0.0;
+	 var sum = 0;
+	    var quantity = 0;
+	    $('.preco').each(function() {
+	        var price = $(this);
+	        var q = price.closest('tr').find('.quntity-input').val();
+	        sum += parseFloat(price.val()) * parseInt(q);
+	        quantity += parseInt(q);
+	      
+	    });
+	    $('.subtotal').html('R$ '+sum.toFixed(2));
+	    total = parseFloat(sum) + parseFloat($('.frete').text());
+	    $('.total').html('R$ '+total.toFixed(2));
+    	
+});
+</script>
+ 
+
+	<script>
+	 
+	 
+	$(".ddd").on("click", function () {
+		  var $button = $(this);
+		  
+		 var createAction = #{jsAction @aumentarQuantidade(':plus',':qtd') /}
+		 $.post(createAction({plus: $button.closest('.cart_quantity_button').find("input.plus").val(), qtd: $button.closest('.cart_quantity_button').find("input.quntity-input").val()}), function(data) {
+				
+		              
+			});
+		
+	  
+	    var oldValue = $button.closest('.cart_quantity_button').find("input.quntity-input").val();
+
+	    if ($button.text() == "+") {
+	        var newVal = parseFloat(oldValue) + 1;
+	    } else {
+	        // Don't allow decrementing below zero
+	        if (oldValue > 0) {
+	            var newVal = parseFloat(oldValue) - 1;
+	        } else {
+	            newVal = 0;
+	        }
+	    }
+
+	    $button.closest('.cart_quantity_button').find("input.quntity-input").val(newVal);
+	
+	    var total = 0.0;
+	    var sum = 0.0;
+	    var quantity = 0;
+	    $('.preco').each(function() {
+	        var price = $(this);
+	        var q = price.closest('tr').find('.quntity-input').val();
+	        sum += parseFloat(price.val()).toFixed(2) * parseInt(q);
+	        quantity += parseFloat(q);
+	      
+	    });
+	    $('.subtotal').html('R$ '+sum.toFixed(2).replace('.', ','));
+	    total =parseFloat(sum)+parseFloat($('.frete').text());
+	    $('.total').html('R$ '+total.toFixed(2).replace('.', ','));
+	});
+	</script>
+	
+
+	<script type="text/javascript">
+		
+	   $('#formpro').submit(function() {
+		   var createAction = #{jsAction @calcularFrete(':rev_texto',':tipo_frete') /}
+			$.post(createAction({rev_texto: $('#inp').val(),tipo_frete: $('#tipo_frete').val()}), function(data) {
+				
+		                $("#bars").html("<li>Frete SEDEX - R$ " + data.fre_valor_SEDEX + "</li><li>Frete PAC - R$ " + data.fre_valor_PAC + "</li><li>Vale Entregas - R$ 4,00 em todo o vale do jaguaribe</li><li>Retirar em Parceiro - R$ 0,00</li>");
+		                $('.frete').html( data.fre_valor);
+		                var a = $('.subtotal').text();
+		                $('.subtotal').html(a);
+		                $('.total').html( parseFloat(a) + parseFloat(data.fre_valor) );
+		               
+			});
+			
+	return false;
+	 });
+	   
+	   
+	   $('#formpro input').on('change', function() {
+		   $("#tipofrete").val($('input[name=gender]:checked', '#formpro').val())  
+		   $("#tipo_frete").val($('input[name=gender]:checked', '#formpro').val())  
+	   });
+</script>

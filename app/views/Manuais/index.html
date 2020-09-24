@@ -1,0 +1,36 @@
+#{extends 'template.html'/}
+<style>
+.about-info {
+    float: left;
+    width: 60%;
+    margin-left: 3em;
+}
+.about-pic {
+    float: left;
+    width: 34%;
+}
+</style>
+<div class="about">
+	 <div class="container">
+	  <div class="breadcrumbs">
+			<ol class="breadcrumb">
+		  <li><a href="@{Application.index()}">inicio</a></li>
+		  <li class="active">sobre</li>
+		 </ol>
+		 </div>
+		 <h2>Tutorial <img src="@{'/public/images/tobebyhenrique.png'}"/></h2>
+		 <div class="about-sec">
+			<video controls>
+				<source src="SampleVideo.ogv" type="video/ogv">
+				<source src="@{'/public/videos/tutorial.mp4'}" type="video/mp4">
+				Your browser does not support the
+				<code>video</code>
+				element.
+			</video>
+			<div class="clearfix"></div>
+		 </div>
+		
+		 </div>
+	 </div>
+</div>
+

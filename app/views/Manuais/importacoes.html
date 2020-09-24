@@ -1,0 +1,36 @@
+#{extends 'template.html'/}
+<style>
+.about-info {
+    float: left;
+    width: 60%;
+    margin-left: 3em;
+}
+.about-pic {
+    float: left;
+    width: 34%;
+}
+</style>
+<div class="about">
+	 <div class="container">
+	  <div class="breadcrumbs">
+			<ol class="breadcrumb">
+		  <li><a href="@{Application.index()}">inicio</a></li>
+		  <li class="active">importacao</li>
+		 </ol>
+		 </div>
+		 <h2>Importação de Produtos <img src="@{'/public/images/tobebyhenrique.png'}"/></h2>
+		
+		      #{form @importar(doc),enctype:'multipart/form-data'}
+    	  <p class="field">
+      
+     
+		<input class="btn btn-default" id="doc" type="file" name="doc"  />  
+         </p>
+          <p class="buttons">
+            <input type="submit" value="upar">
+    </p>
+      #{/form} -->
+     
+     
+		 </div>
+	 </div>

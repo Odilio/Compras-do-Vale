@@ -1,0 +1,162 @@
+
+#{extends 'template.html'/}
+<link href="@{'/public/stylesheets/style2.css'}" media="all"
+	rel="stylesheet">
+	
+ <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                
+                	<div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-md-8 col-md-offset-2">
+                   
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="@{Perfil.index()}">Home</a>
+                        </li>
+                       <li>
+                            <a href="@{Perfil.index()}">pagamento</a>
+                        </li>
+                      
+                    </ol>
+                </div>
+            </div>
+            
+                         <div class="row col-md-12">
+                        <div class="ibox-title">
+<h1>PEDIDO </h1>
+   <div class="row">
+                <div class="wrapper wrapper-content animated fadeInUp">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="m-b-md">
+                                      <div class="caption">
+                                         <h2>PEDIDO NÚMERO ${pedido.ped_codigo}</h2>
+                                          <h3>Assim que comprovarmos o seu pagamento faremos o envio dos seus óculos To Be!.</h3>
+                                         </div>
+                                        <h2>Titulo</h2>
+                                    </div>
+                                    <dl class="dl-horizontal">
+                                        <dt>Status:</dt> <dd><span class="label label-primary">${pedido.ped_status}</span></dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <dl class="dl-horizontal">
+
+                                        <dt>CODIGO PEDIDO:</dt> <dd>${pedido.ped_codigo}</dd>
+                                        <dt>QUANTIDADE:</dt> <dd>  ${pedido.ped_quantidade}</dd>
+                                        <dt>VALOR ITENS:</dt> <dd>R$ ${pedido.ped_valor_itens} </dd>
+                                        <dt>VALOR FRETE:</dt> <dd>R$ ${pedido.ped_frete} </dd>
+                                        <dt>VALOR TOTAL:</dt> <dd>R$ ${pedido.ped_valor} </dd>
+                                          
+                                    </dl>
+                                </div>
+                               
+                            </div>
+                                                          
+                        </div>
+                    </div>
+                </div>
+           
+   
+				 	 <div class="ibox-title">
+                            <h5>Itens do pedido </h5>
+                           
+                        </div>
+   <div class="ibox-content">
+				<table class="table table-hover no-margins">
+					<thead>
+						<tr class="cart_menu">
+						<td class="image">Item</td>
+							<td class="image">Codigo Pedido</td>
+							<td class="price">Referencia</td>
+							<td class="price">Preço</td>
+							<td class="quantity">Quantidade</td>
+							<td class="total">Status</td>
+							
+							<td class="total">Ir para Item</td>
+						
+						</tr>
+					</thead>
+					<tbody>
+							#{paginate.list items:cart, as:'product'} 
+						<tr>
+						<td >
+								<a href=""><img src="${product?.car_caminho_ima}" width="80px" alt=""></a>
+							</td>
+						
+							<td class="cart_price">
+								<p  style="color: red;"> ${product?.ped_codigo}</p>
+							</td>
+							
+							<td >
+								<h4><a href="">${product?.car_codigo}</a></h4>
+								<p>Referência: ${product?.car_referencia}</p>
+							</td>
+						
+							<td >
+								<p  style="color: red;"> ${product?.car_preco}</p>
+							</td>
+							<td class="cart_quantity">
+						     	<p>${product?.car_quantidade}</p>
+						    </td>
+							<td >
+								<p id ="status"> ${product?.car_status}</p>
+							</td>
+								
+							<td>
+								  <a href="@{Application.productDetails(product.pro_codigo)}" class="product-name"><i class="fa fa-search"></i></a>
+							</td>
+							
+						</tr>
+						    #{/paginate.list}
+					</tbody>
+				</table>
+				 #{paginate.controls items:cart /} 
+			</div>
+   
+            
+            
+            <div class="col-lg-10">
+            <div class="col-lg-5">
+<form 
+				action="https://www.paypal.com/cgi-bin/webscr" method="post">
+
+					<input type="hidden" class="paypal" value="${pedido.ped_valor}" name="amount" />
+					<input name="currency_code" type="hidden" value="BRL" /> <input
+						name="shipping" type="hidden" value="0.00" /> <input name="tax"
+						type="hidden" value="0.00" /> <input name="return" type="hidden"
+						value="http://tobesunglasses.com.br/paypal/success?codigo=${pedido}" /> <input
+						name="rm" type="hidden" value="2" /> <input name="cancel_return"
+						type="hidden" value="http://tobesunglasses.com.br/paypal/fail" /> <input
+						name="notify_url" type="hidden"
+						value="http://tobesunglasses.com.br/paypal/validation" /> <input
+						name="cmd" type="hidden" value="_xclick" /> <input
+						name="business" type="hidden" value="odilio@tobesunglasses.com.br" />
+					<input name="receiver_email" type="hidden"
+						value="odilio@tobesunglasses.com.br" /> <input name="item_name"
+						type="hidden" value="Pagamento Ecommerce" /> <input
+						name="no_note" type="hidden" value="1" /> <input type="hidden"
+						name="lc" value="BR"> <input name="bn" type="hidden"
+						value="PP-BuyNowBF" /> <input name="custom" type="hidden"
+						value="3" /> 
+						
+					<!-- <button type="submit" class="btn btn-default btnEnviarMsg">Ir Para Pagamento</button> -->
+	 <button type="submit" class="btn btn-primary btn-lg"
+						name="submit"
+						alt="Faça pagamentos com o PayPal - é rápido, grátis e seguro!"
+						>&{'pagar com Paypal'}<span class="glyphicon glyphicon-chevron-right"></span>
+                </button>
+                </form>
+                </div>
+                <div class="col-lg-5">
+<a href="@{Perfil.index()}" class="btn btn-lg btn-primary">Ir para minha conta</a>
+</div></div>
+            </div>
+             </div>
+            
+
+</div></div></div>

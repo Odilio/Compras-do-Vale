@@ -1,0 +1,247 @@
+#{extends 'template.html'/}
+<meta property="og:image" content="${produto.pro_caminho_ima}"/>
+
+	<link rel="stylesheet" href="@{'/public/stylesheets/etalage.css'}"/>
+						
+	<section>
+		<div class="container">
+		
+			<div class="row">
+				
+				<div class="col-sm-12 padding-right">
+					<div class="product-details"><!--product-details-->
+						<div class="col-sm-5">
+							 <div class="details-left-slider">
+						  <ul id="etalage">
+							 <li>
+								<a href="optionallink.html">
+								<img height="100%" width="100%" class="etalage_thumb_image" alt="${produto.pro_titulo}" src="${produto.pro_caminho_ima}" />
+								<img height="100%" width="100%" class="etalage_source_image" alt="${produto.pro_titulo}" src="${produto.pro_caminho_ima}" />
+								</a>
+							 </li>
+							 <li>
+								<img height="100%" width="100%" class="etalage_thumb_image" alt="${produto.pro_titulo}" src="${produto.pro_caminho_ima2}" />
+								<img height="100%" width="100%" class="etalage_source_image" alt="${produto.pro_titulo}" src="${produto.pro_caminho_ima2}" />
+							 </li>
+							 <li>
+								<img height="100%" width="100%" class="etalage_thumb_image" alt="${produto.pro_titulo}" src="${produto.pro_caminho_ima3}" />
+								<img height="100%" width="100%" class="etalage_source_image" alt="${produto.pro_titulo}" src="${produto.pro_caminho_ima3}" />
+							 </li>
+							
+							 <div class="clearfix"></div>
+						 </ul>
+					 </div>
+
+						</div>
+						<div class="col-sm-7">
+						 #{form @Produtos.addCart()} 	
+						
+							<div class="product-information " itemscope><!--/product-information-->
+								<div class="col-sm-8 ">
+								<h2 itemprop="name">${produto.pro_titulo}</h2>
+								<p itemprop="reference"><b>Referencia: ${produto.pro_referencia}</b></p>
+								
+								<span>
+								
+									<span itemprop="price">R$ ${produto?.pro_preco}</span>
+				
+								</span>
+								
+								<p itemprop="quantity"><b>Quantidade:</b>
+								
+								<input name="produto.pro_cod_usuario" type="hidden" value="${parceiro}" />
+									<input name="produto.pro_codigo" type="hidden" value="${produto?.pro_codigo}" />
+														
+									<input name="produto.pro_quantidade" type="text" value="1" />
+									</p>
+									#{if produto.pro_quantidade_estoque > 0}
+									<button type="submit" class="btn btn-fefault cart" value="Add to cart">
+										Adcione ao Carrinho <i class="fa fa-shopping-cart"></i>
+									</button>
+									#{/if}#{else}Estoque esgotado!#{/else}
+								<p itemprop="estoque"><b>Em estoque:</b> ${produto?.pro_quantidade_estoque}</p>
+								<p itemprop="color"><b>Cor:</b> ${produto?.pro_cor}</p>
+								#{if produto.pro_cod_grupo_produto == 1}
+								<p itemprop="style"><b>Estilo:</b> ${produto?.pro_estilo}</p>
+								<p><b>Espelhado:</b> 
+								<badge class="${produto.pro_espelhado =~ "t" ? 'label label-primary' : 'label label-warning'}">#{if produto.pro_espelhado =~ 't'}&{'sim'}  #{/if}#{else}&{'nao'}#{/else}</badge></p>
+								#{/if}
+								<p itemprop="partner"><b>Parceiro:</b><a href="@{Application.parceiro(produto.pro_cod_produtor)}"> ${produto?.pro_nome_produtor} </a></p>
+								<p itemprop="marca"><b>Marca:</b><a href="@{Application.parceiro('',produto.pro_cod_marca)}"> ${produto?.pro_marca} </a></p>
+								<p><b>Pagamento:</b>
+									<img height="28px" width="75%" alt="credcard pagamento" src="@{'/public/images/creditcard-logos-trans.png'}">
+								</p>
+								
+							<span class="about-pic fa-stack fa-2x"> <i
+								class="fa fa-calendar-o fa-stack-2x"></i> <strong
+								class="fa-stack-1x calendar-text">7</strong>
+
+							</span>
+							<h3>7 DIAS</h3>
+							de garantia
+							contra defeitos de fabricação
+							</div>
+							<div class="fb-share-button"
+								data-href="http://comprasdovale.com.br/produto/codigo=${produto?.pro_codigo}"
+								data-layout="button_count"></div>
+							#{/form}
+							<div class="col-sm-4 ">
+							<div class="chose_area">
+						<form id="formpro">
+						<ul class="user_info">
+						Calcule as opções de frete para seu produto<br>
+							<li class="single_field zip-field">
+								<label>CEP:</label>
+								<input  name="rev_texto" id="inp" type="text">
+							</li>
+						</ul>
+						<ul id="bars">
+ 
+						</ul>
+						<input type="submit" class="btn btn-default update" value="Calcular">
+						
+						</form>
+					</div>
+							</div>
+						</div><!--/product-information-->
+						
+						
+						</div>
+						
+					</div><!--/product-details-->
+					
+					<div class="category-tab shop-details-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+							
+							<li class="active"><a href="#reviews" data-toggle="tab">Comentarios </a></li>
+							<li ><a href="#details" class="detalhes" data-toggle="tab">Detalhes</a></li>
+								
+							</ul>
+						</div>
+						
+						<div class="tab-content">
+						
+									<div class="tab-pane active fade  in" id="reviews" >
+								<div class="col-sm-12">
+								
+						<div id="disqus_thread"></div>
+<script>
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//comprasdovale.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+								</div>
+							</div>
+						
+							<div class="tab-pane  fade" id="details" >
+								<div class="col-sm-12">
+									
+									<p>${produto?.pro_descricao}</p>
+									</div>
+							</div>
+		
+						</div>
+					</div><!--/category-tab-->
+					
+					<div class="recommended_items">
+						<h2 class="title text-center">Mais Vendidos</h2>
+						
+						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner">
+								<div class="item active">	
+									#{list items:maisVendidos, as:'product'} 
+									<div class="col-md-3">
+                    <div class="ibox">
+                        <div class="ibox-content product-box " itemscope>
+ <a href="@{Application.productDetails(product.pro_codigo)}" class="product-name">
+                            <div class="productinfo">
+                             	<img  height="100%" width="100%" src="${product.pro_caminho_ima_thumb}" alt="${product.pro_titulo}" />
+                            </div>
+                            <div class="product-desc">
+                                <span class="product-price" itemprop="price">
+                                  R$ ${product.pro_preco}
+                                </span>
+                                <small class="text-muted">${product.pro_categoria}</small>
+                                <a href="@{Application.productDetails(product.pro_codigo)}" class="product-name" itemprop="name"> ${product.pro_titulo}</a>
+
+                              
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+									  #{/list} 
+									    
+								</div>
+							
+							</div>
+										
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+	
+		<script type="text/javascript">
+		
+	   $('#formpro').submit(function() {
+		   var createAction = #{jsAction @calcularFrete(':rev_texto') /}
+			$.post(createAction({rev_texto: $('#inp').val()}), function(data) {
+				
+		                $("#bars").html("<li>Frete SEDEX - R$ " + data.fre_valor + "</li> <hr /><li>Frete PAC - R$ " + data.fre_valor_PAC + "</li> <hr /><li>Vale Entregas - R$ 4,00 em todo o vale do jaguaribe</li> <hr /><li>Retirar em Parceiro - R$ 0,00</li>");
+		                    
+			});
+			
+	return false;
+	 });
+</script>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1095799413776868',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+<script src="@{'/public/javascripts/jquery.etalage.min.js'}"></script>
+<script>
+	jQuery(document).ready(function($){
+					
+				$('#etalage').etalage({
+					thumb_image_width: 400,
+					thumb_image_height: 300,
+					source_image_width: 750,
+					source_image_height: 650,
+					show_hint: true,
+					click_callback: function(image_anchor, instance_id){
+					}
+					});
+					// This is for the dropdown list example:
+					$('.dropdownlist').change(function(){
+						etalage_show( $(this).find('option:selected').attr('class') );
+					});
+					
+					});
+</script>

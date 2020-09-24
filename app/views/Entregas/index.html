@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="keywords" content="compras, ecommerce"/>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1">-->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<meta name="robots' content="noindex,nofollow" />
+    <title>Compras do Vale</title>
+
+    <!-- ESTILO CADASTRO -->
+  <link rel="shortcut icon" type="image/png" href="@{'/public/images/logomin.png'}" />
+
+
+    <!-- Bootstrap -->
+<link
+	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<link href="@{'/public/stylesheets/style2.css'}" media="all"
+	rel="stylesheet">
+	
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.5.0/metisMenu.min.js"></script>
+   <style>
+.ibox-content {
+    clear: both;
+    margin-top: 30px;
+}
+ @media screen and (min-width: 1100px) {
+  .container {
+    width: 1020px;
+}
+}
+@media screen and (min-width: 1300px) {
+  .container {
+    width: 1150px;
+}
+}
+
+@media screen and (min-width: 1400px) {
+  .container {
+    width: 1280px;
+}
+}
+ 
+ #page-wrapper {
+    position: inherit;
+    margin: 0 0 0 0px;
+    min-height: 1000px;
+    }
+	  </style>
+    
+  </head>
+  
+  <body>
+   <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                    <form role="search" class="navbar-form-custom" method="post" action=''>
+                        <div class="form-group">
+                            <input type="text" placeholder="Pesquisar..." class="form-control" name="busca" id="top-search">
+                        </div>
+                    </form>
+                </div>
+                
+                
+                <ul class="nav navbar-top-links navbar-right">
+                 <li>
+                        <a href="@{Application.index()}">
+                             Ir para Ecommerce
+                        </a>
+                    </li>
+                
+                    <li>
+                    #{if user}
+                        <a href="@{Entregas.logout()}">
+                            <i class="fa fa-sign-out"></i> Log out
+                        </a>
+                    #{/if}
+                    #{else} <a href="@{Entregas.logar()}" > <i class="fa fa-sign-out"></i>&nbsp; Entre</a>#{/else}    
+                    </li>
+                </ul>
+
+            </nav>
+        </div>
+  <div id="wrapper">
+
+	<section>
+	
+		<div class="container well princi">
+	 <div class="row">
+  	<div class="col-sm-12 col ">
+ <i class="fa fa-truck fa-4x"></i>
+ <h2>Aproveite suas viagens a passeio ou a trabalho para ter uma renda extra</h2>
+ <p>Informe o persurso que vai fazer para que possamos encontrar um encomenda para você entregar em sua viagem.</p>
+ #{if user}
+ <a href="@{Entregas.admin()}" id="criar" class="btn btn-default" >&{'Vá para seu painel administrativo'}</a>
+  #{/if}
+#{else}
+  <a href="@{Entregas.logar()}" id="criar" class="btn btn-default" >&{'Crie sua conta e comece a postar suas rotas'}</a>
+  #{/else} 
+</div>
+                            
+                            
+	</div>
+	
+		
+		
+		<div class="ibox-content">
+		<div class="ibox-title">
+			<h3>Rotas abertas</h3> 
+		</div>
+				<table class="table table-hover no-margins">
+					<thead>
+						<tr class="cart_menu">
+						<td class="image"></td>
+							<td class="image">Origem</td>
+							
+							<td class="price">Destino</td>
+							<td class="quantity">Data Pedido</td>
+							<td class="total">Data Limite Chegada</td>
+							<td class="total">Frete</td>
+							<td class="Usuario">Comprador</td>
+							<td class="total">Detalhes</td>
+							<td class="total">Candidatar-se</td>
+						
+						</tr>
+					</thead>
+					<tbody>
+							#{paginate.list items:rotas, as:'product'} 
+						<tr>
+						
+							<td class="cart_price">
+								<form id="myForm">
+								<input name="radioName" id="${product?.rot_codigo}"  value="${product?.rot_codigo}" type="checkbox">
+								</form>
+							</td>
+							
+							<td class="cart_description">
+								<a ><p style="color: blue;">${product?.rot_cidade_origem}</p></a>
+								
+							</td>
+						
+							
+						
+							<td class="cart_price">
+								<a ><p  style="color: red;"> ${product?.rot_cidade_destino}</p></a>
+							</td>
+							<td class="cart_quantity">
+							<div class=" cart_quantity_button">
+								
+									<p > ${product?.rot_data_partida}</p>
+								
+							</div>
+						</td>
+							<td >
+								<p id ="status">${product?.rot_data_chegada}</p>
+							</td>
+							<td >
+								<p  style="color: red;" id ="frete">R$ 3,00 </p>
+							</td>
+								<td >
+						<p>${product?.rot_nome_completo}</p>
+							</td>
+							<td>
+								<a class="cart_quantity_delete" href="@{Entregas.mostrarPedido(product.ped_codigo)}"><i class="fa fa-search"></i></a>
+							</td>
+							<td>
+								<a data-toggle="modal" class="confirmar select cart_quantity_delete" ><i class="fa fa-search"></i></a>
+							</td>
+						</tr>
+						    #{/paginate.list}
+					</tbody>
+				</table>
+				 #{paginate.controls items:rotas /} 
+			</div>
+	</section>
+</div>
+</div>
+
+
+<div id="modalDelete" class="modal fade">
+
+		<div class="modal-dialog">
+
+			<div class="modal-content col-sm-10">
+				<div class="modal-header">
+					<a href="#" class="close">&times;</a>
+					<h3>Candidatar-se para Entrega</h3>
+				</div>
+				<div class="modal-body">
+					<p>Ao cancelar o este titulo, o mesmo não poderá ser recuperado.</p>
+					<p>Deseja confirmar esta operação?</p>
+					<p id="debug-url"></p>
+				</div>
+				<div class="modal-footer">
+
+					<form class="form-horizontal" role="form"
+						action="@{Admin.cancelarTitulo()}">
+						<input type="hidden" id="tit_codigo" name="titulo.tit_codigo" />
+						<input type="submit" id="send" name="send" value="Sim" class="btn danger">
+						<a href="#" data-dismiss="modal" class="btn secondary">Não</a>
+					</form>
+					
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<script type="text/javascript">
+			
+			$(document).ready(function(){
+				
+				   $(".select").click(function(){ 
+				 	   
+				     $("#tit_codigo").val($(this).data('codigo'));
+				    
+				     $('#modalDelete').modal('show');
+				   });
+				   
+				   $(".confirmar").click(function(){ 
+				 	   
+					     $("#titulo_codigo").val($(this).data('codigo'));
+					     $("#ped_codigo").val($(this).data('ped_codigo'));
+					     $('#modalConfirm').modal('show');
+					   });
+				   
+				});
+			
+</script>
+</body>
+
+
+
+</html>

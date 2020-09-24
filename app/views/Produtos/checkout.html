@@ -1,0 +1,280 @@
+#{extends 'template.html'/}
+<style>
+.sp-quantity {
+    width:124px;
+    height:42px;
+    font-family:"ProximaNova Bold", Helvetica, Arial;
+}
+.sp-minus {
+    width:40px;
+    height:40px;
+    border:1px solid #e1e1e1;
+    float:left;
+    text-align:center;
+}
+.sp-input {
+    width:40px;
+    height:40px;
+    border:1px solid #e1e1e1;
+    border-left:0px solid black;
+    float:left;
+}
+.sp-plus {
+    width:40px;
+    height:40px;
+    border:1px solid #e1e1e1;
+    border-left:0px solid #e1e1e1;
+    float:left;
+    text-align:center;
+}
+.sp-input input {
+    width:30px;
+    height:34px;
+    text-align:center;
+    font-family:"ProximaNova Bold", Helvetica, Arial;
+    border: none;
+}
+.sp-input input:focus {
+    border:1px solid #e1e1e1;
+    border: none;
+}
+.sp-minus a, .sp-plus a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding-top: 5px;
+}
+
+.register-req, .heading {
+    font-size: 20px;
+    margin-top: 10%;
+    margin-bottom: 35px;
+    padding: 0px 25px;
+    font-family: 'Roboto', sans-serif;
+}
+.ibox-content {
+    background-color: #ffffff;
+    color: inherit;
+    padding: 15px 20px 20px 20px;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 0px;
+}
+</style>
+	<section id="cart_items">
+		<div class="container">
+			
+				<h2 class="heading">Revisão e Pagamento</h2>
+				
+			<div class="table-responsive cart_info ibox-content">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="menu-conta">
+							<td class="image">Item</td>
+							<td class="description"></td>
+							<td class="price">Preço</td>
+							<td class="quantity">Quantidade</td>
+							<td class="total">Total</td>
+							
+						</tr>
+					</thead>
+					<tbody>
+						 #{list items:lista, as:'product'}
+						<tr>
+							<td>
+								<a href="@{Application.productDetails(product.pro_codigo)}"><img src="${product?.car_caminho_ima}"  width="80px"  alt=""></a>
+							</td>
+							<td class="cart_description">
+								<h4><a href="@{Application.productDetails(product.pro_codigo)}">${product?.car_titulo}</a></h4>
+								<p>Referencia: ${product?.car_referencia}</p>
+							</td>
+							<td class="cart_price">
+							<input type="hidden" class="preco" value="${product?.car_preco}" size="2"/>
+								<p style="color: red;">R$ ${product?.car_preco}</p>
+							</td>
+						<td class="cart_quantity">
+							<div class=" cart_quantity_button">
+								
+								
+									<input readonly="readonly"   type="text" name="cart.car_quantidade" class="quntity-input cart_quantity_input" value="${product?.car_quantidade}" size="2"/>
+								
+									
+								
+							</div>
+						</td>
+						<td class="cart_total">
+								<p class="cart_total_price">R$ ${product?.car_preco}</p>
+							</td>
+							
+						</tr>
+						  #{/list}
+						<tr>
+							<td colspan="4">&nbsp;</td>
+							<td colspan="2">
+								<table class="table table-condensed total-result">
+									<tr>
+										<td>Cart Sub Total</td>
+										<td class="subtotal " style="color:red;">R$ 0,00</td>
+									</tr>
+									
+									<tr class="shipping-cost">
+										<td>Custo de Envio</td>
+										<td>R$<span class="frete"> ${fre_valor?.fre_valor}</span></td>										
+									</tr>
+									<tr>
+										<td>Total</td>
+										<td><span class="stotal ">R$ 0,00</span></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+<!-- <div class="payment-options">
+					<span>
+						<label><input type="checkbox"> Transferência Bancaria</label>
+					</span>
+					<span>
+						<label><input type="checkbox"> Boleto</label>
+					</span>
+					<span>
+						<label><input type="checkbox"> Paypal</label>
+					</span>
+				</div> -->
+	
+			<div class="shopper-informations">
+				<div class="row">
+					
+					<div class="col-sm-5 clearfix">
+						<div class="bill-to">
+							<p>Enviar para</p>
+							<div class="form-one">
+								
+									<input type="text" readonly="readonly"  value="${endereco?.end_nome}" placeholder="Nome">
+									<input type="text" readonly="readonly"  value="${endereco?.end_email}" placeholder="Email*">
+									<input type="text" readonly="readonly"  value="${endereco?.end_endereco1}" placeholder="Endereço *">
+									<input type="text" readonly="readonly"  value="${endereco?.end_endereco2}" placeholder=" Complemento ">
+								
+							</div>
+							<div class="form-two">
+								<input type="text" readonly="readonly"  value="${endereco?.end_cep}" placeholder="CEP *">
+									
+									
+									<select >
+										
+										<option>Brasil</option>
+										
+										
+									</select> 
+								<select>
+										
+										<option >${endereco?.end_estado}</option>
+										
+										
+									</select> <input readonly="readonly"  value="${endereco?.end_celular}" type="text" placeholder="Celular *">
+								
+								
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-sm-4">
+						<div class="order-message">
+							<p>Informações Adicionais</p>
+							<textarea readonly="readonly"  name="message"  placeholder="Notas sobre seu pedido, Notas especiais para entrega" rows="4">${endereco?.end_info_adicional} </textarea>
+							
+						</div>	
+					</div>		
+					<div class="col-sm-3">
+						<div class="shopper-info">
+							
+						
+						
+<form class="clearfix"
+				action="https://www.paypal.com/cgi-bin/webscr" method="post">
+
+					<input type="hidden" class="paypal" value="" name="amount" />
+					<input name="currency_code" type="hidden" value="BRL" /> <input
+						name="shipping" type="hidden" value="0.00" /> <input name="tax"
+						type="hidden" value="0.00" /> <input name="return" type="hidden"
+						value="http://comprasdovale.com.br/paypal/success?codigo=${pedido}" /> <input
+						name="rm" type="hidden" value="2" /> <input name="cancel_return"
+						type="hidden" value="http://comprasdovale.com.br/paypal/fail" /> <input
+						name="notify_url" type="hidden"
+						value="http://comprasdovale.com.br/paypal/validation" /> <input
+						name="cmd" type="hidden" value="_xclick" /> <input
+						name="business" type="hidden" value="contato@comprasdovale.com.br" />
+					<input name="receiver_email" type="hidden"
+						value="contato@comprasdovale.com.br" /> <input name="item_name"
+						type="hidden" value="Pagamento Ecommerce" /> <input
+						name="no_note" type="hidden" value="1" /> <input type="hidden"
+						name="lc" value="BR"> <input name="bn" type="hidden"
+						value="PP-BuyNowBF" /> <input name="custom" type="hidden"
+						value="3" /> 
+						<div class="form-group input-group-lg col-md-9">
+						
+						</div>
+					<!-- <button type="submit" class="btn btn-default btnEnviarMsg">Ir Para Pagamento</button> -->
+	 <button type="submit" class="btn btn-primary btn-lg"
+						name="submit"
+						alt="Faça pagamentos com o PayPal - é rápido, grátis e seguro!"
+						>&{'pagar com Cartão'}&nbsp;<i class="fa fa-credit-card "></i>
+                </button>
+                </form>
+                
+                <form action="@{Perfil.mostrarPedido(pedido)}">
+                 <button type="submit" class="btn btn-primary btn-lg"
+						name="codigo" value="${pedido}"
+						alt="Pague em nossos parceiros!"
+						>&{'Pagar ao Parceiro'}&nbsp;<i class="fa fa-users "></i>
+                </button>
+                </form>
+                
+                   <form action="@{Perfil.mostrarPedido(pedido)}">
+                 <button type="submit" class="btn btn-primary btn-lg"
+						name="codigo" value="${pedido}"
+						alt="Pague em nossos parceiros!"
+						>&{'Deposito Bancário'}&nbsp;<i class="fa fa-university" aria-hidden="true"></i>
+                </button>
+                </form>
+                
+			<!-- 	<form class="clearfix"
+				action="@{Produtos.boleto()}" method="post">
+				<input type="hidden" class="paypal" value="" name="amount" />
+			<button type="submit" class="btn btn-primary btn-lg"
+						name="submit"
+						alt="Faça seu pagamento com boleto!"
+						>&{'Boleto'}<span class="glyphicon glyphicon-chevron-right"></span>
+                </button>
+							</form> -->
+						</div>
+					</div>			
+				</div>
+			</div>
+			
+			
+	</section> <!--/#cart_items-->
+
+<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+	<script type="text/javascript">
+$(document).ready(function() {
+	 $(".menuTopCheckout").css("color", "pink");
+	 var total = 0.0;
+	var sum = 0.0;
+	    var quantity = 0;
+	    $('.preco').each(function() {
+	        var price = $(this);
+	        var q = price.closest('tr').find('.quntity-input').val();
+	        sum += parseFloat(price.val()) * parseFloat(q);
+	        quantity += parseFloat(q);
+	    });
+	    $('.subtotal').html('R$ '+sum.toFixed(2).replace('.', ','));
+	    total = parseFloat(sum)+parseFloat($('.frete').text());
+	    $('.stotal').html('R$ ' + total.toFixed(2).replace('.', ','));
+	    $('.paypal').val(total.toFixed(2));
+});
+</script>
+
+

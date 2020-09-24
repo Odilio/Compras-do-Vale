@@ -1,0 +1,125 @@
+#{extends 'template.html'/}
+   
+	<style>
+	.ibox-title {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #ffffff;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 4px 0px 0;
+    color: inherit;
+    margin-bottom: 0;
+    padding: 14px 15px 7px;
+    min-height: 48px;
+}
+.ibox-content {
+    background-color: #ffffff;
+    color: inherit;
+    padding: 15px 20px 20px 20px;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 0px;
+}
+.bloco {
+    width: 90%;
+}
+
+#cart_items .cart_info .menu-conta {
+    background: #eee;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+}
+
+.register-req, .heading {
+    font-size: 20px;
+    margin-bottom: 35px;
+    padding: 0px 25px;
+    font-family: 'Roboto', sans-serif;
+}
+	</style>
+
+	
+<section id="cart_items">
+		<div class="container">
+			<div class="row">
+					
+					#{include 'menuConta.html'/}
+					
+				<div class="col-sm-9 padding-right">
+				
+					<h2 class="heading">Todos os seus Pedidos</h2>
+				
+			
+      <div class="table-responsive cart_info ibox-content">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="menu-conta">
+							<td class="image">Pedidos</td>
+							
+							<td class="price">Preço</td>
+							<td class="quantity">Quantidade</td>
+							<td class="total">Status</td>
+							<td class="total">Frete</td>
+							<td class="description">Data</td>
+							<td class="total">Itens</td>
+							<td class="total">Pagar</td>
+						</tr>
+					</thead>
+					<tbody>
+						 #{list items:lista, as:'product'}
+						<tr>
+							
+							<td class="cart_description">
+								<h5><a href="@{Perfil.mostrarPedido(product.ped_codigo)}">Ver Detalhes</a></h5>
+								<p>Codigo: ${product?.ped_codigo}</p>
+							</td>
+						
+						
+							<td class="cart_price">
+								<h4>R$ ${product?.ped_valor}</h4>
+							</td>
+							<td class="cart_quantity">
+							<div class=" cart_quantity_button">
+								
+									<p  style="color: red;">${product?.ped_quantidade}</p>
+								
+							</div>
+						</td>
+							<td >
+								<p >${product?.ped_status}</p>
+							</td>
+							<td >
+								<p >${product?.ped_tipo_frete}</p>
+							</td>
+							<td >
+								 ${product?.ped_data}
+							</td>
+							<td>
+								<a class="cart_quantity_delete" href="@{Perfil.itensPedidos(product.ped_codigo)}"><i class="fa fa-search"></i></a>
+							</td>
+								<td>
+								<a class="cart_quantity_delete" href="@{Perfil.pagamento(product.ped_codigo)}"><i class="fa fa-paypal"></i></a>
+							</td>
+						</tr>
+						   #{/list}
+					</tbody>
+				</table>
+			</div>
+			<!--features_items-->
+					
+					<div class="category-tab"><!--category-tab-->
+					 		
+					</div><!--/category-tab-->
+					
+				
+				</div>
+			</div>
+		</div>
+	</section>
+

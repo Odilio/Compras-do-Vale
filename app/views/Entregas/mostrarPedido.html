@@ -1,0 +1,166 @@
+
+#{extends 'template.html'/}
+
+<link href="@{'/public/stylesheets/style2.css'}" media="all"
+	rel="stylesheet">
+<style>
+body {
+    background-color: #aaa;
+}
+</style>
+	
+ <div class="row">
+                 <div class="col-md-8 col-md-offset-2">
+                
+                	<div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-md-8 col-md-offset-2">
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="@{Perfil.index()}">Home</a>
+                        </li>
+                       <li>
+                            <a href="@{Perfil.index()}">mostrar pedido</a>
+                        </li>
+                      
+                    </ol>
+                </div>
+            </div>
+            
+            
+                    <div class="row col-md-12">
+                        <div class="ibox-title">
+<h1>PEDIDO </h1>
+</div>
+   <div class="row">
+      <div class="wrapper wrapper-content">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="m-b-md">
+                                      <div class="caption">
+                                         <h2>PEDIDO NÚMERO ${pedido.ped_codigo}</h2>
+                                          <h3>Dados do seu Pedido.</h3>
+                                         </div>
+                                        <h2>Titulo</h2>
+                                    </div>
+                                    <dl class="dl-horizontal">
+                                        <dt>Status:</dt> <dd><span class="label label-primary">${pedido.ped_status}</span></dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <dl class="dl-horizontal">
+
+                                        <dt>CODIGO PEDIDO:</dt> <dd>${pedido.ped_codigo}</dd>
+                                        <dt>QUANTIDADE:</dt> <dd>  ${pedido.ped_quantidade}</dd>
+                                        <dt>FRETE:</dt> <dd>  ${pedido.ped_tipo_frete}</dd>
+                                        <dt>VALOR ITENS:</dt> <dd>R$ ${pedido.ped_valor_itens} </dd>
+                                        <dt>VALOR FRETE:</dt> <dd>R$ ${pedido.ped_frete} </dd>
+                                        <dt>VALOR TOTAL:</dt> <dd>R$ ${pedido.ped_valor} </dd>
+                                          
+                                    </dl>
+                                </div>
+                               
+                            </div>
+                                 <div class="row">
+                                <div class="col-lg-10">
+                                    <dl class="dl-horizontal">
+
+									<dt>NOME DO CLIENTE:</dt><dd>${endereco?.end_nome}</dd>
+									<dt>EMAIL DO CLIENTE:</dt><dd>	${endereco?.end_email}</dd>
+									<dt>ENDEREÇO DO CLIENTE:</dt><dd>	${endereco?.end_endereco1}</dd>
+									<dt>COMPLEMENTO:</dt><dd>${endereco?.end_endereco2}</dd>
+									<dt>CEP:</dt>
+													<dd>${endereco?.end_cep}</dd>
+													<dt>PAÍS:</dt>
+													<dd>Brasil</dd>
+													<dt>ESTADO:</dt>
+													<dd>${endereco?.end_estado}</dd>
+													<dt>CELULAR:</dt>
+													<dd>${endereco?.end_celular}</dd>
+								</dl>
+							</div>
+							</div>                         
+                        </div>
+                    </div>
+                </div>
+          </div>
+
+
+ <div class="wrapper wrapper-content">
+				 	 <div class="ibox-title">
+                            <h5>Itens do pedido </h5>
+                           
+                        </div>
+   <div class="ibox-content">
+    <div id="map"></div>
+				<table class="table table-hover no-margins">
+					<thead>
+						<tr class="cart_menu">
+						<td class="image">Item</td>
+							<td class="image">Codigo Pedido</td>
+							<td class="price">Referencia</td>
+							<td class="price">Preço</td>
+							<td class="quantity">Quantidade</td>
+							<td class="total">Status</td>
+							
+							<td class="total">Ir para Item</td>
+						
+						</tr>
+					</thead>
+					<tbody>
+							#{paginate.list items:cart, as:'product'} 
+						<tr>
+						<td >
+								<a href=""><img src="${product?.car_caminho_ima}" width="80px" alt=""></a>
+							</td>
+						
+							<td class="cart_price">
+								<p  style="color: red;"> ${product?.ped_codigo}</p>
+							</td>
+							
+							<td >
+								<h4><a href="">${product?.car_codigo}</a></h4>
+								<p>Referência: ${product?.car_referencia}</p>
+							</td>
+						
+							<td >
+								<p  style="color: red;">R$ ${product?.car_preco}</p>
+							</td>
+							<td class="cart_quantity">
+						     	<p>${product?.car_quantidade}</p>
+						    </td>
+							<td >
+								<p id ="status"> ${product?.car_status}</p>
+							</td>
+								
+							<td>
+								  <a href="@{Application.productDetails(product.pro_codigo)}" class="product-name"><i class="fa fa-search"></i></a>
+							</td>
+							
+						</tr>
+						    #{/paginate.list}
+					</tbody>
+				</table>
+				 #{paginate.controls items:cart /} 
+			</div>
+				</div>
+
+  
+</div></div></div>
+
+
+  <script>
+  function initMap() {
+	  // Create a map object and specify the DOM element for display.
+	  var map = new google.maps.Map(document.getElementById('map'), {
+	    center: {lat: -34.397, lng: 150.644},
+	    scrollwheel: false,
+	    zoom: 8
+	  });
+	}
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoulBxx4H_cczlxxdSb8c7dvyljUfaUAw&signed_in=true&callback=initMap"
+        async defer></script>

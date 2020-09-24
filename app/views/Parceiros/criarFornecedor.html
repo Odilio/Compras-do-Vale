@@ -1,0 +1,68 @@
+#{extends 'templateParceiro.html'/}
+
+<div class="container">
+	<div class="row">
+	           <div class="col-sm-9 padding-right">
+                <div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-9"><h2> &{'Fornecedores'}</h2>		</div></div>
+                     
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+ <table class="table table-hover">
+ <thead>
+     <tr >
+     <th>&{'Nome'}</th>
+     <th>&{'Editar'}</th>
+	 <th>&{'configuracoes'}</th>
+     </tr>
+</thead>
+<tbody class="animsition">   
+ 
+  #{list items:fornecedores, as:'product'}
+            <tr>
+		<td class="project-title">
+  			<a data-toggle="tooltip" title="&{'tooltipOpen'}" class="animsition-link" href="" > ${product?.for_nome} ${product?.for_codigo}  </a>
+  		 </td>
+  <td >
+  	 	<a href="#cadastro" class="btn btn-white btn-sm announce"  data-titulo="${product.for_nome}" data-codigo="${product.for_codigo}" data-toggle="tooltip"  ><i class="fa fa-pencil-square-o fa-2x"></i> Editar </a>
+  	 </td>
+  	 	<td class="project-title">
+  			<a data-toggle="tooltip" title="&{'tooltipOpen'}" class="animsition-link" href="" ><i class="fa fa-cog fa-2x"></i> </a>
+  		 </td>
+  	 </tr>    
+               #{/list}
+ 	 </tbody>
+  		</table>
+ 	<form data-persist="garlic" action="@{Admin.addFornecedor()}"  enctype="multipart/form-data" method="post" id="formpro">
+ 	
+ 	<input type="hidden"  id="for_codigo" name="fornecedor.for_codigo" value="${fornecedor?.for_codigo}"/>
+   <h4> &{'titulo'}  </h4>
+    	<input placeholder="&{'Nome Fornecedor'}" required minlength="2" class="form-control" type="text"  id="titulo" value="${fornecedor?.for_nome}" name="fornecedor.for_nome"/>
+      <br>
+ 	
+	 <input type="submit" id="criar" value="&{'salvar'}" class="btn btn-default" ></input>
+		</form> 
+	
+	<br>
+</div></div></div></div></div>
+	
+
+
+ <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js" ></script>
+ <script>
+$("#formpro").validate();
+</script>
+<script>
+$(document).ready(function(){
+	   $(".announce").click(function(){ 
+	     
+	     $("#for_codigo").val($(this).data('codigo'));
+	     $("#titulo").val($(this).data('titulo'));
+	     $("#subtitulo").val($(this).data('subtitulo'));
+	     document.getElementById("uploadPreview1").src =  $(this).data('imagem');
+	     CKEDITOR.instances.editor1.setData( $(this).data('resumo') );
+	   
+	   });
+	});
+
+</script> 

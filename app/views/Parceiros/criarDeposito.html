@@ -1,0 +1,76 @@
+#{extends 'templateParceiro.html'/}
+
+<div class="container">
+	<div class="row">
+	           <div class="col-sm-9 padding-right">
+                <div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-9"><h2> &{'Depositos'}</h2>		</div></div>
+                     
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+ <table class="table table-hover">
+ <thead>
+     <tr >
+     <th>&{'Codigo'}</th>
+     <th>&{'Parceiro'}</th>
+	 <th>&{'Titulo'}</th>
+	 <th>&{'Defeito'}</th>
+	 <th>&{'Admin'}</th>
+     </tr>
+</thead>
+<tbody class="animsition">   
+ 
+  #{list items:depositos, as:'product'}
+            <tr>
+		<td class="project-title">
+  			<a data-toggle="tooltip" title="&{'tooltipOpen'}" class="animsition-link" href="" >${product?.dep_cod_deposito}  </a>
+  		 </td>
+ 		 <td >
+   		 	<a href="#cadastro" class="btn btn-white btn-sm announce"  data-titulo="${product.dep_titulo}" data-codigo="${product.dep_codigo}" data-toggle="tooltip"  ><i class="fa fa-pencil-square-o fa-2x"></i>${product?.dep_parceiro}  </a>
+     	 </td>
+  	 	 <td class="project-title">
+  			<a data-toggle="tooltip" title="&{'tooltipOpen'}" class="animsition-link" href="" >${product?.dep_titulo} </a>
+  		 </td>
+  		 <td class="project-title">
+  			<a data-toggle="tooltip" title="&{'tooltipOpen'}" class="animsition-link" href="" >${product?.dep_defeito} </a>
+  		 </td>
+  		  <td class="project-title">
+  			<a data-toggle="tooltip" title="&{'tooltipOpen'}" class="animsition-link" href="" >${product?.dep_admin} </a>
+  		 </td>
+  	 </tr>    
+               #{/list}
+ 	 </tbody>
+  		</table>
+ 	<form data-persist="garlic" action="@{Admin.addCategoria()}"  enctype="multipart/form-data" method="post" id="formpro">
+ 	 	
+ 	<input type="hidden"  id="dep_codigo" name="deposito.dep_codigo" value="${deposito?.dep_codigo}"/>
+   <h4> &{'titulo'}  </h4>
+    	<input placeholder="&{'tituloCategoria'}" required minlength="2" class="form-control" type="text"  id="titulo" value="${deposito?.dep_titulo}" name="deposito.dep_titulo"/></fieldset>
+      <br>
+ 	
+	 <input type="submit" id="criar" value="&{'salvar'}" class="btn btn-default" ></input>
+		</form> 
+	
+	<br>
+</div></div></div></div></div>
+	
+
+
+ <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js" ></script>
+ <script>
+$("#formpro").validate();
+</script>
+<script>
+$(document).ready(function(){
+	   $(".announce").click(function(){ 
+	     
+	     $("#dep_codigo").val($(this).data('codigo'));
+	     $("#titulo").val($(this).data('titulo'));
+	     $("#subtitulo").val($(this).data('subtitulo'));
+	     document.getElementById("uploadPreview1").src =  $(this).data('imagem');
+	     CKEDITOR.instances.editor1.setData( $(this).data('resumo') );
+	   
+	   });
+	});
+
+</script> 

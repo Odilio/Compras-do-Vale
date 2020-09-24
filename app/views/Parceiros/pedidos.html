@@ -1,0 +1,194 @@
+#{extends 'templateParceiro.html'/}
+
+
+	
+<section id="cart_items">
+		<div class="container">
+			<div class="row">
+					
+				<div class="col-sm-12 padding-right">
+				<div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-9">
+                    <h2>	ADMIN</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="@{Parceiros.admin()}">Home</a>
+                        </li>
+                       <li>
+                            <a href="@{Parceiros.pedidos()}">pedidos</a>
+                        </li>
+                      
+                    </ol>
+                </div>
+            </div>
+				 <div class="wrapper wrapper-content">
+				 	 <div class="ibox-title">
+                            <h5>Pedidos </h5>
+                           
+                        </div>
+   <div class="ibox-content">
+				<table class="table table-hover no-margins">
+					<thead>
+						<tr class="cart_menu">
+						<td class="image"></td>
+							<td class="image">Pedidos</td>
+							
+							<td class="price">Preço</td>
+							<td class="quantity">Quantidade</td>
+							<td class="total">Status</td>
+							<td class="Usuario">Comprador</td>
+							<td class="description">Data</td>
+							<td class="total">Itens</td>
+							<td class="total">Detalhes</td>
+						
+						</tr>
+					</thead>
+					<tbody>
+								#{paginate.list items:lista, as:'product'} 
+						<tr>
+						
+							<td class="cart_price">
+								<form id="myForm">
+								<input name="radioName" id="${product?.car_codigo}"  value="${product?.car_codigo}" type="checkbox">
+								</form>
+							</td>
+							
+							<td class="cart_description">
+								<h4><a href="">${product?.car_status}</a></h4>
+								<p>Codigo: ${product?.car_codigo}</p>
+							</td>
+							
+							<td class="cart_price">
+								<p  style="color: red;">R$ ${product?.car_preco}</p>
+							</td>
+							<td class="cart_quantity">
+							<div class=" cart_quantity_button">
+								
+									<p >${product?.car_quantidade}</p>
+								
+							</div>
+						</td>
+							<td >
+								<p  class="${product?.car_status =~ "Aguardando" ? 'label label-primary' : 'label label-danger'}">  ${product?.car_status}</p>
+							</td>
+							
+								<td >
+									<a class="cart_quantity_delete" href="@{Parceiros.mostrarCliente(product.usu_codigo)}"> ${product?.usu_codigo}</a>
+							</td>
+							<td >
+								 ${product?.ped_data}
+							</td>
+							<td>
+								<a class="cart_quantity_delete" href="@{Parceiros.itensPedidos(product.ped_codigo)}"><i class="fa fa-search"></i></a>
+							</td>
+							<td>
+								<a class="cart_quantity_delete" href="@{Parceiros.mostrarPedido(product.ped_codigo)}"><i class="fa fa-search"></i></a>
+							</td>
+						</tr>
+						    #{/paginate.list}
+					</tbody>
+				</table>
+				 #{paginate.controls items:lista /} 
+			</div>
+				</div><!--features_items-->
+				
+			
+				</div>
+			</div>
+		</div>
+	</section>
+
+<script>
+var pedidos = "";
+
+$('#myForm input').on('change', function() {
+	  $( ".pedidoid" ).html( "<h5>Pedido - ");
+	  pedidos = "";
+	$('input[name="radioName"]:checked').each(function() {
+		pedidos = pedidos + this.value + "-" ;
+		   $( ".pedidoid" ).append(  this.value + " - " );
+		 });
+	 $( ".pedidoid" ).append(  " </h5>" );
+	});
+	
+	
+	
+$('#formpro').submit(function() {
+	   var createAction = #{jsAction @statusProdutoEntregue(':rev_texto') /}
+		$.post(createAction({rev_texto: pedidos}), function(data) {
+			
+	                $("#bars").html("<img width='100%' src='" + data.car_caminho_ima + "'></img>");
+	            
+	                $('#inp').focus();
+	                $('#status').text("foi");
+	                
+	                 
+	                var sum = 0.0;
+	        	    var quantity = 0;
+	        	    $('.preco').each(function() {
+	        	        var price = $(this);
+	        	        var q = price.closest('tr').find('.quntity-input').val();
+	        	        sum += parseFloat(price.val()) * parseInt(1);
+	        	        quantity += parseFloat(q);
+	        	      
+	        	    });
+	        	    $('.subtotal').html(sum);
+	        	    $('.total').html(parseInt(sum) + parseInt($('.frete').text()));
+	        	    
+		});
+		
+return false;
+});	
+
+$('#formstatusconcluido').submit(function() {
+	   var createAction = #{jsAction @statusProdutoEntregue(':rev_texto') /}
+		$.post(createAction({rev_texto: pedidos}), function(data) {
+			
+			 $('#status').text("Concluido");
+			
+		});
+		
+return false;
+});	
+
+
+$('#formstatusenvio').submit(function() {
+	   var createAction = #{jsAction @statusProdutoParaEnvio(':rev_texto') /}
+		$.post(createAction({rev_texto: pedidos}), function(data) {
+			
+			  $('#status').text("Aguardando Envio");
+		});
+		
+return false;
+});	
+
+$('#formenviado').submit(function() {
+	   var createAction = #{jsAction @statusProdutoEnviado(':rev_texto') /}
+		$.post(createAction({rev_texto: pedidos}), function(data) {
+			
+			  $('#status').text("Enviado");
+		});
+		
+return false;
+});	
+
+$('#formstatuscancelado').submit(function() {
+	   var createAction = #{jsAction @statusProdutoCancelado(':rev_texto') /}
+		$.post(createAction({rev_texto: pedidos}), function(data) {
+			
+			  $('#status').text("Cancelado");
+		});
+		
+return false;
+});	
+
+$('#formstatuspagamento').submit(function() {
+	   var createAction = #{jsAction @statusProdutoAguardandoPagamento(':rev_texto') /}
+		$.post(createAction({rev_texto: pedidos}), function(data) {
+			
+			  $('#status').text("Aguardando Pagamento");
+		});
+		
+return false;
+});	
+</script>

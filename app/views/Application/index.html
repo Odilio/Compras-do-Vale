@@ -1,0 +1,186 @@
+#{extends 'template.html'/}
+<meta property="og:image" content="@{'/public/images/infantil.jpg'}"/>
+<style>
+.title{
+font-size:20px;
+}
+h3 {
+	font-size: 12px;
+}
+.top-deal-product {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+    margin-left: 0;
+}
+.center-align {
+    text-align: center;
+}
+</style>
+
+
+<div class="container">
+	<div class="col-sm-12">
+
+		#{include 'menu.html'/}
+
+		<div class="col-sm-7 branco">
+			<section class="jk-slider">
+				<div id="carousel-example" class="carousel slide"
+					data-ride="carousel">
+					<ol class="carousel-indicators">
+						<li data-target="#carousel-example" data-slide-to="0"
+							class="active"></li>
+						<li data-target="#carousel-example" data-slide-to="1"></li>
+						<li data-target="#carousel-example" data-slide-to="2"></li>
+					</ol>
+
+					<div class="carousel-inner">
+
+						<div class="item active">
+							<div class="hero"></div>
+							<div class=""></div>
+							<a href="#"><img height="100%" width="100%"
+								src="@{'/public/images/banner4.jpg'}" alt="compras de esportes" /></a>
+
+						</div>
+						<div class="item">
+							<div class="hero"></div>
+
+							<div class=""></div>
+							<a href="#"><img height="100%" width="100%"
+								src="@{'/public/images/estilo.jpg'}" alt="compras de estilo" /></a>
+
+						</div>
+						<div class="item">
+							<div class="hero"></div>
+							<div class=""></div>
+							<a href="#"><img height="100%" width="100%"
+								src="@{'/public/images/infantil.jpg'}" alt="compras de infantil" /></a>
+
+						</div>
+					</div>
+
+					<a class="left carousel-control" href="#carousel-example"
+						data-slide="prev"> <span
+						class="glyphicon glyphicon-chevron-left"></span>
+					</a> <a class="right carousel-control" href="#carousel-example"
+						data-slide="next"> <span
+						class="glyphicon glyphicon-chevron-right"></span>
+					</a>
+				</div>
+
+			</section>
+		</div>
+		
+		<div class="col-sm-3 ">
+			<div class="top-deal-product">
+ 				<img height="100%" width="100%" src="@{'/public/images/lateral.jpg'}" alt="">
+ </div>
+
+			</div>
+	</div>
+</div>
+<section>
+	<div class="container margin branco">
+		<div class="row">
+
+
+			<div class="col-sm-12 ">
+				<div class="features_items">
+					<!--features_items-->
+
+					<hr>
+
+					#{paginate.list items:listaProdutos, as:'product'}
+					<div class="col-md-3">
+						<div class="ibox">
+							<div class="ibox-image product-box " itemscope>
+								<a href="@{Application.productDetails(product.pro_codigo)}"
+									class="product-name">
+									<div class="productinfo">
+										<img alt="${product.pro_titulo}" height="100%" width="100%"
+											src="${product.pro_caminho_ima_thumb}" />
+									</div>
+									<div class="product-desc">
+										<span class="product-price" itemprop="price"> 
+											R$ ${product.pro_preco} </span>
+										<h3 class="text-muted">${product.pro_categoria}</h3>
+										<a href="@{Application.productDetails(product.pro_codigo)}"
+											class="product-name" itemprop="name">
+											${product.pro_titulo_reduzido}</a>
+
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+					#{/paginate.list}
+
+				</div>
+				<!--features_items-->
+				<div class="center-align">#{paginate.controls
+					items:listaProdutos /}</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container margin branco">
+		<div class="row">
+			<div class="recommended_items">
+				<!--recommended_items-->
+				<h3 class="title text-center">Produtos mais recomendados</h3>
+				<hr>
+				<div id="recommended-item-carousel" class="carousel slide"
+					data-ride="carousel">
+					<div class="carousel-inner">
+						<div class="item active">
+							#{list items:maisVendidos, as:'product'}
+							<div class="col-md-3">
+								<div class="ibox">
+									<div class="ibox-image product-box " itemscope>
+										<a href="@{Application.productDetails(product.pro_codigo)}"
+											class="product-name">
+											<div class="productinfo">
+												<img height="100%" width="100%"
+													src="${product.pro_caminho_ima_thumb}"
+													alt="${product.pro_titulo}" />
+											</div>
+											<div class="product-desc">
+												<span class="product-price" itemprop="price">R$ ${product.pro_preco}
+												</span>
+												<h3 class="text-muted">${product.pro_categoria}</h3>
+												<a href="@{Application.productDetails(product.pro_codigo)}"
+													class="product-name" itemprop="name">
+													${product.pro_titulo}</a>
+
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+							#{/list}
+
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+			<!--/recommended_items-->
+
+		</div>
+	</div>
+</section>
+
+<script>
+$(document).ready(function() {
+	   $('.product-price').each(function() {
+	        var price = $(this);
+	        $('.product-price').html('R$ '+total.toFixed(4).replace('.', ','));
+	      
+	    });
+});	  
+	   </script>

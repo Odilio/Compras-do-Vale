@@ -1,0 +1,333 @@
+#{extends 'templateAdmin.html'/}
+<style>
+.view-product img {
+  border: 1px solid #F7F7F0;
+  height: 380px;
+  width: 100%;
+}
+
+.view-product h3 {
+  background: #D7142F;
+  bottom: 0;
+  color: #FFFFFF;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 0;
+  padding: 8px 20px;
+  position: absolute;
+  right: 0;
+}
+</style>
+	<section>
+		<div class="container">
+		
+			<div class="row">
+							
+				<div class="col-sm-12 padding-right">
+					<div class="product-details"><!--product-details-->
+						#{if flash?.error}
+					<div class='col-sm-10' style='color:red'><h2 class='m-xs'>${flash.error}</h2></div>
+							#{/if}
+						 #{form @Admin.addProduto(), enctype:'multipart/form-data'} 	
+						<div class="col-sm-5">
+						
+							<div class="view-product">
+								
+								 <img id="uploadPreview1" 
+											src="${produto?.pro_caminho_ima}" /><br />
+											<span class="btn btn-primary btn-file">
+											Escolher Imagem
+											 <input
+											class="upload" id="uploadImage1" type="file"
+											name="produto.pro_imagem" onchange="PreviewImage(1);" />
+											</span>
+							
+							</div>
+							
+								  <!-- Wrapper for slides -->
+								    <div class="view-product" >
+										
+										 <img id="uploadPreview2" 
+											src="${produto?.pro_caminho_ima2}" /><br />
+											<span class="btn btn-primary btn-file">
+											Escolher Imagem
+											 <input
+											class="upload" id="uploadImage2" type="file"
+											name="produto.pro_imagem2" onchange="PreviewImage(2);" />
+											</span>
+										
+										
+										</div>
+										 <div class="view-product" >	
+											 <img id="uploadPreview3" 
+											src="${produto?.pro_caminho_ima3}" /><br />
+											<span class="btn btn-primary btn-file">
+											Escolher Imagem
+											 <input
+											class="upload" id="uploadImage3" type="file"
+											name="produto.pro_imagem3" onchange="PreviewImage(3);" />
+											</span>
+										
+										
+										
+									</div>
+
+							
+
+						</div>
+						<div class="col-sm-7">
+							<div class="product-information"><!--/product-information-->
+								
+								<h2>Nome do Produto</h2>
+								<h2><input class="form-control" type="text" placeholder="Nome do Produto" size="10" name="produto.pro_titulo" value="${produto?.pro_titulo}"></h2>
+								
+								
+									<h2>Referência do Produto</h2>
+								<h2><input class="form-control" type="text" placeholder="Referência do Produto" size="10" name="produto.pro_referencia" value="${produto?.pro_referencia}"></h2>
+								
+							
+								
+									<h2>Preço de Venda R$</h2>
+								
+									
+								
+								<input class="form-control" type="text" placeholder="$ Preço" size="2" name="produto.pro_preco" value="${produto?.pro_preco}">
+							
+								
+									<h2>Preço de Compra R$</h2>
+								
+									
+								
+								<input class="form-control" type="text" placeholder="$ Preço de compra" size="2" name="produto.pro_preco_compra" value="${produto?.pro_preco_compra}">
+								
+									<h2>Porcentagem de premio para revendedor</h2>
+	
+								<input class="form-control" type="text" placeholder="Porcentagem de premio para revendedor" size="2" name="produto.pro_porcentagem_premio" value="${produto?.pro_preco_compra}">
+								
+									<input type="hidden" name="produto.pro_quantidade" value="1" />
+								<br>
+								<p><b>Estoque:</b> <input type="text" name="produto.pro_quantidade_estoque" value="${produto?.pro_quantidade_estoque}" /></p>
+								<p><b>Peso:</b> <input type="text" name="produto.pro_peso" value="${produto?.pro_peso}" /></p>
+								<label>Espelhado:</label>
+								<input id="espelhado" type="checkbox" ${produto.pro_espelhado ? 'checked':''} name="produto.pro_espelhado"  />
+							
+								<label>Usado:</label>
+								<input id="espelhado" type="checkbox" ${produto.pro_usado ? 'checked':''} name="produto.pro_usado"  />
+									
+									<p><b>Cor:</b> 
+								</p>
+
+				#{select 'produto.pro_cor', value:produto.pro_cor, id:'select1',class:'form-control'}
+					#{option 'Branco'}Branco#{/option}
+					#{option 'Rosa'}Rosa#{/option}
+					#{option 'Roxo'}Roxo#{/option}
+					#{option 'Lilas'}Lilas#{/option}
+					#{option 'Vermelho'}Vermelho#{/option}
+					#{option 'Amarelo'}Amarelo#{/option}
+					#{option 'Marron'}Marron#{/option}
+					#{option 'Preto'}Preto#{/option}
+					#{option 'Azul'}Azul#{/option}
+					#{option 'Verde'}Verde#{/option}
+					#{option 'Dourado'}Dourado#{/option}
+					#{option 'Cinza'}Cinza#{/option}
+					#{option 'Laranja'}Laranja#{/option}
+				#{/select}
+
+							<p>
+								<b>Estilo:</b></p> 
+								
+						#{select 'produto.pro_estilo',	value:produto.pro_estilo, id:'select1',class:'form-control'}
+							#{option 'Nenhum'}Não Aplicavel#{/option}	 
+							#{option 'Aviador'}Aviador#{/option} 
+							#{option 'Classico'}Classico#{/option}
+							#{option 'Curvado'}Curvado#{/option} 
+							#{option 'Esporte'}Esporte#{/option}
+							#{option 'Fashion'}Fashion#{/option}
+							#{option 'Gatinho'}Gatinho#{/option} 
+							#{option 'LentesGrandes'}LentesGrandes#{/option}
+							#{option 'Mascara'}Mascara#{/option} 
+							#{option 'Quadrado'}Quadrado#{/option}
+							#{option 'Redondo'}Redondo#{/option} 
+							#{option 'Retangular'}Retangular#{/option}
+							#{option 'Retro'}Retro#{/option}
+							#{option 'Infantil'}Infantil#{/option} 
+							#{option 'Bossa Nova'}Bossa Nova#{/option}
+							#{option 'Jazz'}Jazz#{/option} 
+							#{option 'New Sport'}New Sport#{/option}
+						 #{/select}
+
+
+
+							<p><b>Categoria:</b> </p>
+							
+							#{select 'produto.pro_categoria',	value:produto.pro_categoria, id:'select1',class:'form-control'}
+								#{option 'Feminina'}Moda Feminina#{/option} 
+								#{option 'Masculina'}Moda Masculina#{/option}
+								#{option 'Esporte'}Esporte e Lazer#{/option} 
+								#{option 'Telefones'}Telefones e Acessorios#{/option}
+								#{option 'Informatica'}Informática#{/option}
+								#{option 'Eletronicos'}Eletronicos#{/option}
+								#{option 'Casa'}Casa e Jardim#{/option} 
+								#{option 'Automoveis'}Automóveis e Motocicletas#{/option}
+								#{option 'Beleza'}Beleza e Saúde#{/option}
+							 #{/select}
+							
+								
+	
+							<p><b>Genero:</b> </p>
+							#{select 'produto.pro_genero', value:produto.pro_genero, id:'select2',class:'form-control'}
+								#{option 'Feminino'}Feminino#{/option}
+								#{option 'Masculino'}Masculino#{/option}
+								#{option 'Unissex'}Unissex#{/option}
+								#{option 'Infantil Feminino'}Infantil Feminino#{/option}
+								#{option 'Infantil Masculino'}Infantil Masculino#{/option}
+	
+							#{/select}
+
+								<label>Habilitar Opções:</label>
+								<input id="pro_habilitar_opcoes" type="checkbox" ${produto.pro_habilitar_opcoes ? 'checked':''} name="produto.pro_habilitar_opcoes"  />
+								
+								<p><b>Marca do Produto</b></p>
+								<h2><input class="form-control" type="text" placeholder="Marca do Produto" size="10" name="produto.pro_marca" value="${produto?.pro_marca}"></h2>
+								
+								<p><b>Prioridade:</b> </p>
+							
+							#{select 'produto.pro_prioridade',	value:produto.pro_prioridade, id:'select1',class:'form-control'}
+								#{option '1'}1#{/option} 
+								#{option '2'}2#{/option}
+								#{option '3'}3#{/option} 
+								
+							 #{/select}
+								
+								<p><b>Grupo do Produto</b></p>
+								<select class="form-control" id="pro_cod_grupo_produto" name="produto.pro_cod_grupo_produto">
+									<option value="0">&{'Escolha Grupo'}</option>
+								#{list items:listaGrupos, as:'grupo'} 
+      						    	<option value="${grupo.gru_codigo}">${grupo.gru_nome}</option>
+          						 #{/list} 
+      						</select>
+								<!-- <h2><input class="form-control" type="text" placeholder="Grupo do Produto" size="10" name="produto.pro_cod_grupo_produto" value="${produto?.pro_cod_grupo_produto}"></h2>
+								<button type="button" onclick="modal()"  class="btn btn-fefault cart" >
+										Buscar Grupo
+								</button> -->
+					
+			
+									<p><b>Parceiro: ${produto.pro_nome_produtor} / ${produto.pro_cod_produtor}  </b> </p>
+							#{select 'produto.pro_cod_produtor', value:produto?.pro_cod_produtor, id:'select2',class:'form-control'}
+								#{option '1'}Próprio#{/option}
+								
+							#{/select}
+								
+															
+								
+									<p><b>Descrição:</b> </p>
+									<textarea  class="form-control" placeholder="Descrição do Produto" size="10" name="produto.pro_descricao"  >
+										${produto?.pro_descricao}
+									</textarea>
+									
+									
+								<input type="hidden" name="produto.pro_codigo" value="${produto?.pro_codigo}" />
+								
+							<input type="submit" value="Cadastrar" class="btn btn-default pull-right"/>
+										
+							</div><!--/product-information-->
+							#{/form}
+						</div>
+						
+					</div><!--/product-details-->
+					
+				
+				
+					
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	
+		<div id="modalConfirm" class="modal fade">
+
+		<div class="modal-dialog">
+
+			<div class="modal-content col-sm-10">
+				<div class="modal-header">
+					<a href="#" class="close">&times;</a>
+					<h3>Buscar Grupo do Produto</h3>
+				</div>
+				<div class="modal-body">
+					
+   <div class="ibox-content">
+				<table class="table table-hover no-margins">
+					<thead>
+						<tr class="cart_menu">
+						<td class="total">Codigo</td>
+						<td class="image">Grupo</td>
+						<td class="price"></td>
+						
+						</tr>
+					</thead>
+					<tbody id="pedido">
+							
+					</tbody>
+				</table>
+				 
+			</div>
+				
+				</div>
+				<div class="modal-footer">
+
+					<form class="form-horizontal" role="form"
+						action="@{Perfil.cancelar()}">
+						<input type="hidden" id="ped_codigo" name="ped_codigo" />
+						<button id="send" name="send" class="btn danger">Sim</button>
+						<a href="#" data-dismiss="modal" class="btn secondary">Não</a>
+					</form>
+					
+
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+<script type="text/javascript">
+    function PreviewImage(no) {
+        var oFReader = new FileReader();
+        oFReader.readAsDataURL(document.getElementById("uploadImage"+no).files[0]);
+
+        oFReader.onload = function (oFREvent) {
+            document.getElementById("uploadPreview"+no).src = oFREvent.target.result;
+          
+        };
+        
+    }
+    
+  
+</script>
+  
+
+  <script type="text/javascript">
+  function modal()
+  {
+	  $('#modalConfirm').modal('show');
+	  
+	  
+	  
+	  var createAction = #{jsAction @listarGrupoProduto() /}
+		$.post(createAction(), function(data) {
+			  $.each(data, function(index, item) {
+				  $("#pedido").append("<tr id='"+item.gru_codigo+"'><td> " + item.gru_codigo + "</td><td> " + item.gru_nome + "</td><td><a><i class='fa fa-times'></i></a></td</tr>");
+			  }
+	              
+	               
+	              
+	                
+	                
+	     
+	        	    
+		});
+  }   
+
+	 
+</script>

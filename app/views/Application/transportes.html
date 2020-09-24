@@ -1,0 +1,109 @@
+#{extends 'template.html'/}
+<link href="@{'/public/stylesheets/datepicker3.css'}" media="all"
+	rel="stylesheet">
+<link href="@{'/public/stylesheets/clockpicker.css'}" media="all"
+	rel="stylesheet">
+	
+	<style>
+	body{
+	background-color:#eee;
+}
+
+	</style>
+
+	
+	<section>
+		<div class="container">
+			<div class="row">
+					<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="@{Application.index()}">Inicio</a></li>
+				  <li class="active">Conta</li>
+				</ol>
+			</div>	
+				
+				
+				<div class="container margin branco">
+	 <div class="row well">
+  			
+  				<h2>Cadastro de Entregador</h2>
+						<form action='@{Buscar.index()}' id="preco">
+						
+					<div class="form-group input-group-lg col-md-6"
+						id="checkout-payment-user-cpf">
+						<label>Email *</label><input class="form-control"
+							name="parceiro.par_email" required id="cpf" placeholder=""
+							type="text" value="">
+					</div>
+					
+					<div class="form-group input-group-lg col-md-6">
+						<label>Telefone *</label>
+						<input class="form-control" id="number" name="parceiro.par_celular" placeholder="" type="text" value="">
+					</div>
+					
+					
+					<div class="form-group input-group-lg col-md-12">
+						<label>Nome Completo *</label><input class="form-control" required
+							id="user_name" name="parceiro.par_nome_completo"
+							placeholder="Seu nome completo" type="text" value="${parceiro?.par_nome_completo}">
+					</div>
+					
+					<div class="form-group input-group-lg col-md-6">
+						<p><b>De:</b> </p>
+							
+							<select class="form-control" id="pro_cod_marca" name="mar_codigo">
+							<option value="0">&{'Escolha Local de saída'}</option>
+
+								<option value="">Tabuleiro do Norte</option>
+								<option value="">Limoeiro do Norte</option>
+								<option value="">São João do Jaguaribe</option>
+								<option value="">Fortaleza</option>
+							</select>
+						</div>
+					<div class="form-group input-group-lg col-md-6">
+					<p><b>Para:</b> </p>
+							
+							<select class="form-control" id="pro_cod_marca" name="mar_codigo">
+							<option value="0">&{'Escolha Local de chegada'}</option>
+								<option value="">Tabuleiro do Norte</option>
+								<option value="">Limoeiro do Norte</option>
+								<option value="">São João do Jaguaribe</option>
+								<option value="">Fortaleza</option>
+      						</select>
+      						</div>
+      						
+      						 <div class="form-group col-md-6" id="data_1">
+                                <label class="font-noraml">Data de partida </label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value="03/04/2016">
+                                </div>
+                            </div>
+                            
+                             <div class="  col-md-6" data-autoclose="true">
+                             <label class="font-noraml">Hora de partida </label>
+                             <div class="clockpicker input-group">
+                                <input type="text" class="form-control" value="09:30" >
+                                <span class="input-group-addon">
+                                    <span class="fa fa-clock-o"></span>
+                                </span>
+                            </div></div>
+                            
+                            <input type="submit" class="btn btn-default get" value="Cadastrar Rota">
+                            
+							 </div>
+						</form></div></div>
+			</div>
+		</div>
+	</section>
+	<script	src="@{'/public/javascripts/bootstrap-datepicker.js'}"></script>
+	<script	src="@{'/public/javascripts/clockpicker.js'}"></script>
+	<script>
+	$('.clockpicker').clockpicker();
+	 $('#data_1 .input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
+</script>

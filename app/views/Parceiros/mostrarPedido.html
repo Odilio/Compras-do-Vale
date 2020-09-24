@@ -1,0 +1,105 @@
+#{extends 'templateParceiro.html'/}
+
+ <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="ibox-title">
+<h1>PEDIDO </h1>
+  <div class="row">
+            <div class="col-lg-9">
+                <div class="wrapper wrapper-content animated fadeInUp">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="m-b-md">
+                                      <div class="caption">
+                                         <h2>PEDIDO NÚMERO ${pedido.ped_codigo}</h2>
+                                          <h3>Dados do seu Pedido.</h3>
+                                         </div>
+                                        <h2>Titulo</h2>
+                                    </div>
+                                    <dl class="dl-horizontal">
+                                        <dt>Status:</dt> <dd><span class="label label-primary">${pedido.ped_status}</span></dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <dl class="dl-horizontal">
+
+                                        <dt>CODIGO PEDIDO:</dt> <dd>${pedido.ped_codigo}</dd>
+                                        <dt>DATA PEDIDO:</dt> <dd>${pedido.ped_data}</dd>
+                                        <dt>QUANTIDADE:</dt> <dd>  ${pedido.ped_quantidade}</dd>
+                                        <dt>FRETE:</dt> <dd>  ${pedido.ped_tipo_frete}</dd>
+                                        <dt>VALOR ITENS:</dt> <dd> ${pedido.ped_valor_itens} </dd>
+                                        <dt>VALOR FRETE:</dt> <dd> ${pedido.ped_frete} </dd>
+                                        <dt>VALOR TOTAL:</dt> <dd> ${pedido.ped_valor} </dd>
+                                          
+                                    </dl>
+                                </div>
+                               
+                            </div>
+							                
+                        </div>
+                    </div>
+                </div>
+            </div></div>
+
+
+ <div class="wrapper wrapper-content">
+				 	 <div class="ibox-title">
+                            <h5>Itens do pedido </h5>
+                           
+                        </div>
+   <div class="ibox-content">
+				<table class="table table-hover no-margins">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Codigo Pedido</td>
+								<td class="image">Item</td>
+							<td class="price">Referencia</td>
+							<td class="price">Preço</td>
+							<td class="quantity">Quantidade</td>
+							<td class="total">Status</td>
+							
+							<td class="total">Ir para Item</td>
+						
+						</tr>
+					</thead>
+					<tbody>
+							#{paginate.list items:cart, as:'product'} 
+						<tr>
+							<td class="cart_price">
+								<p  style="color: red;"> ${product?.ped_codigo}</p>
+							</td>
+							<td class="cart_product ">
+								<a href=""><img src="${product?.car_caminho_ima}" width="80px" alt=""></a>
+							</td>
+							<td >
+								<h4><a href="">${product?.car_codigo}</a></h4>
+								<p>Referência: ${product?.car_referencia}</p>
+							</td>
+						
+							<td >
+								<p  style="color: red;"> ${product?.car_preco}</p>
+							</td>
+							<td class="cart_quantity">
+						     	<p>${product?.car_quantidade}</p>
+						    </td>
+							<td >
+								<p id ="status"> ${product?.car_status}</p>
+							</td>
+								
+							<td>
+								<a class="cart_quantity_delete" href="@{Parceiros.productDetails(product.pro_codigo)}"><i class="fa fa-search"></i></a>
+							</td>
+							
+						</tr>
+						    #{/paginate.list}
+					</tbody>
+				</table>
+				 #{paginate.controls items:cart /} 
+			</div>
+				</div>
+
+</div></div></div>

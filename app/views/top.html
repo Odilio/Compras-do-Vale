@@ -1,0 +1,149 @@
+<style>
+.badge {
+	background-color: #e62e04;
+}
+.top-banner-container {
+	height: 17%;
+	width:100%;
+	text-align: center;
+	background-position: center top;
+	background-repeat: no-repeat;
+}
+.top {
+    margin-top: 10px;
+}
+.top-Warp {
+	height: 30px;
+	font-size: 11px;
+	background-color: #fff;
+	box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+	border-bottom: solid 1px #ddd;
+}
+
+.t-Divider{
+	margin: 11px 0px;
+	height: 11px;
+	width: 1px;
+	background-color: #ddd;
+}
+
+.col-sm-12 {
+	position: relative;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+.header-middle {
+	background-color: white;
+}
+.col-sm-5 {
+	position: relative;
+	padding-top: 2%;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+.margem {
+	float: right;
+	font-size: 11px;
+	padding-left: 5%;
+	padding-bottom: 2%;
+}
+
+.espaco {
+	padding-left: 6%;
+	color: #333;
+}
+
+.input-group-addon:last-child {
+	border-left: 0;
+	background-color: #e62e04;
+	color: white;
+}
+.navbar-nav > li > a, .navbar-brand {
+    padding-top:4px !important; 
+    padding-bottom:0 !important;
+    height: 28px;
+}
+.navbar-default {
+    background-color: #FFFFFF;
+    height: 30px;
+}
+.navbar {min-height:28px !important;}
+</style>
+<div class="row">
+	<img height="100%" width="100%" class="top-banner-container"
+		alt="banner topo"
+		src="@{'/public/images/topo.jpg'}">
+</div>
+<header id="header">
+	<!--header-->
+
+		<div class="top-Warp col-sm-12">
+				<nav class="navbar navbar-default">
+  <div class="container-fluid">
+       <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav top">
+       	Bem vindo!#{if user}  <b>${user.usu_nome}</b> #{/if} 
+       	#{else}<a href="@{Application.logar()}">Registre-se
+							Grátis</a> ou <a href="@{Application.logar()}">Entre em sua
+							conta</a>
+		#{/else}
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+      	 	<li class="t-Divider"></lin>
+						<li><a  href="">Parceiros</a></lin>
+						<li class="t-Divider"></lin>
+						<li><a href="">Dúvidas</a></lin>
+						<li class="t-Divider"></lin>
+						<li><a href="@{Sobre.sobre()}">Sobre</a></lin>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+		</div>
+	<!--/header_top-->
+
+	<div class="header-middle  col-sm-12">
+		<!--header-middle-->
+		<div class="header-wrap container">
+			<div class="col-sm-2">
+				<a href="@{Application.index()}"><img
+					alt="Encontre tudo o que procura, sem sair de casa! " height="90%"
+					width="120px" src="@{'/public/images/logo.png'}" /> </a>
+			</div>
+
+
+			<div class="col-sm-5">
+				<form action="@{Buscar.index()}" method="get">
+					<div class="input-group">
+						<input type="text" placeholder="Buscar" name="SearchText"
+							class="form-control" /> <span class="input-group-addon"> <i
+							class="fa fa-search"></i>
+						</span>
+					</div>
+				</form>
+			</div>
+
+			<div class="col-sm-5 margem">
+				<a href="@{Produtos.cart()}"><span class="espaco"><i
+						class="fa fa-shopping-cart fa-2x fa-fw"></i>&nbsp;Carrinho <span
+						class="badge">${carrinho}</span></span></a> <a href="@{Perfil.index()}"
+					class="menuTopConta"><span class="espaco"><i
+						class="fa fa-user fa-2x fa-fw"></i>&nbsp;Conta <span class="badge">${conta}</span>
+				</span></a> #{if user} <a href="@{Application.logout()}"><span
+					class="espaco"><i class="fa fa-key fa-2x fa-fw"></i>&nbsp;Logout</span></a>
+				#{/if} #{else} <a href="@{Application.logar()}"><span
+					class="espaco"><i class="fa fa-key fa-2x fa-fw"></i>&nbsp;
+						Entre</span></a>#{/else}
+
+			</div>
+
+		</div>
+
+	</div>
+	<!--/header-middle-->
+</header>
+<!--/header-->

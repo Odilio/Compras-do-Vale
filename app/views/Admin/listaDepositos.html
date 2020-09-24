@@ -1,0 +1,91 @@
+#{extends 'templateAdmin.html'/}
+
+
+	
+<section id="cart_items">
+		<div class="container">
+			<div class="row">
+					
+					
+				<div class="col-sm-9 padding-right">
+				<div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-9">
+                    <h2>	ADMIN</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="@{Admin.admin()}">Home</a>
+                        </li>
+                       <li>
+                            <a href="@{Admin.listaClientes()}">clientes</a>
+                        </li>
+                      
+                    </ol>
+                </div>
+            </div>
+				 <div class="wrapper wrapper-content">
+				  <div class="ibox-title">
+                            <h5>Clientes </h5>
+                           
+                        </div>
+                        
+   <div class="ibox-content">
+				<table class="table table-hover no-margins">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Codigo</td>
+							
+							<td class="price">Nome</td>
+							<td class="quantity">Codigo Deposito</td>
+							<td class="total">Defeito</td>
+							<td class="description"></td>
+						
+						</tr>
+					</thead>
+					<tbody>
+							#{paginate.list items:listaProdutos, as:'product'} 
+						<tr>
+							
+							
+							<td class="cart_description">
+								<h4><a href=""></a></h4>
+								<p> ${product?.dep_codigo}</p>
+							</td>
+						
+						
+							<td class="cart_price">
+								<p  >${product?.dep_titulo}</p>
+							</td>
+							<td class="cart_quantity">
+							<div class=" cart_quantity_button">
+								
+									<p  > ${product?.dep_cod_deposito}</p>
+								
+							</div>
+						</td>
+							
+								<td >
+								 ${product?.dep_defeito}
+							</td>
+							
+							<td>
+								<a class="cart_quantity_delete" href="@{Admin.itensPedidos()}"><i class="fa fa-search"></i></a>
+							</td>
+							
+						</tr>
+						    #{/paginate.list}
+					</tbody>
+				</table>
+				 #{paginate.controls items:lista /} 
+			</div>
+				</div><!--features_items-->
+					
+					<div class="category-tab"><!--category-tab-->
+					 		
+					</div><!--/category-tab-->
+					
+				
+				</div>
+			</div>
+		</div>
+	</section>
+

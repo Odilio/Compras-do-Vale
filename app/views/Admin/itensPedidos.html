@@ -1,0 +1,70 @@
+#{extends 'templateAdmin.html'/}
+   
+	
+	
+<section id="cart_items">
+		<div class="container">
+			<div class="row">
+					<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="@{Admin.admin()}">Conta Admin</a></li>
+				  <li class="active">Lista de Itens por pedido</li>
+				</ol>
+			</div>
+					
+				<div class="col-sm-9 padding-right">
+				 <div class="wrapper wrapper-content">
+   <div class="ibox-content">
+				<table class="table table-hover no-margins">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Item</td>
+							<td class="description"></td>
+							<td class="description"></td>
+							<td class="price">Preço</td>
+							<td class="quantity">Quantidade</td>
+							<td class="total">Status</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						#{paginate.list items:lista, as:'product'} 
+						<tr>
+							<td class="cart_product ">
+								<a href=""><img src="${product?.car_caminho_ima}" width="80px" alt=""></a>
+							</td>
+							<td>
+							</td>
+							<td class="cart_description">
+								<h4><a href="">${product?.car_titulo}</a></h4>
+								<p>Referência: ${product?.car_referencia}</p>
+							</td>
+							<td class="cart_price">
+								<p  style="color: red;">R$ ${product?.car_preco}</p>
+							</td>
+							<td class="cart_quantity">
+									<p>${product?.car_quantidade}</p>
+							</td>
+							<td class="cart_total">
+								
+    ${product?.car_status}
+							</td>
+							
+						</tr>
+						  #{/paginate.list} 
+					</tbody>
+				</table>
+				 #{paginate.controls items:lista /} 
+			</div>
+				</div><!--features_items-->
+					
+					<div class="category-tab"><!--category-tab-->
+					 		
+					</div><!--/category-tab-->
+					
+				
+				</div>
+			</div>
+		</div>
+	</section>
+  

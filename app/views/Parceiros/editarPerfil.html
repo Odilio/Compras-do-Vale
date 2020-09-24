@@ -1,0 +1,95 @@
+#{extends 'templateParceiro.html'/}
+<link href="@{'/public/stylesheets/bootstrap-colorpicker.min.css'}" media="all"
+	rel="stylesheet">
+<style>
+.view-product img {
+  border: 1px solid #F7F7F0;
+  height: 300px;
+  width: 75%;
+}
+.view-background img {
+  border: 1px solid #F7F7F0;
+  height: 380px;
+  width: 100%;
+}
+</style>
+	<section>
+		<div class="container">
+			<div class="row">
+					
+			
+				<div class="col-sm-12 padding-right">
+				
+				 <div class="row wrapper border-bottom white-bg page-heading">
+                    <h2>Editor</h2>
+                            <div class="ibox-content">
+                            	 #{form @Parceiros.atualizarParceiro(), enctype:'multipart/form-data'} 	
+                         <div class="col-sm-12">
+                         
+                         <div class="view-background">
+								
+								 <img id="uploadPreview2" 
+											src="${parceiro?.par_back_caminho_ima}" /><br />
+											<span class="btn btn-primary btn-file">
+											Escolher Imagem
+											 <input
+											class="upload" id="uploadImage2" type="file"
+											name="parceiro.par_back_imagem" onchange="PreviewImage(2);" />
+											</span>
+							
+							</div>
+                         </div>   	 
+						<div class="col-sm-5">
+						<input class="form-control" type="hidden"  name="parceiro.par_codigo" value="${parceiro?.par_codigo}">
+							<div class="view-product">
+								
+								 <img id="uploadPreview1" 
+											src="${parceiro?.par_caminho_ima}" /><br />
+											<span class="btn btn-primary btn-file">
+											Escolher Imagem
+											 <input
+											class="upload" id="uploadImage1" type="file"
+											name="parceiro.par_imagem" onchange="PreviewImage(1);" />
+											</span>
+							
+							</div></div>
+							
+							<div class="col-sm-7">
+								<h2>Nome para Exposição</h2>
+								<h2><input class="form-control" type="text" placeholder="Nome de Exposição" size="10" name="parceiro.par_nome" value="${parceiro?.par_nome}"></h2>
+							<h2>Nome Completo</h2>
+								<h2><input class="form-control" type="text" placeholder="Nome do Expositor" size="10" name="parceiro.par_nome_completo" value="${parceiro?.par_nome_completo}"></h2>
+							<h2>Frase</h2>
+								<h2><input class="form-control" type="text" placeholder="Frase do Expositor" size="10" name="parceiro.par_frase" value="${parceiro?.par_frase}"></h2>	
+							<h2>Cor Background</h2>
+								<h2><input class="form-control demo1" type="text" placeholder="Cor Background" size="10" name="parceiro.par_cor_background" value="${parceiro?.par_cor_background}"></h2>
+							<h2>Email</h2>
+								<h2><input class="form-control"	name="parceiro.par_email" required id="email" placeholder="Email"	type="text" value="${parceiro?.par_email}"></h2>
+							<h2>Senha</h2>
+								<h2><input class="form-control"	name="parceiro.par_senha" required id="senha" placeholder="Senha"	type="text" value="${parceiro?.par_senha}"></h2>
+							 <input type="submit" id="criar" value="&{'salvar'}" class="btn btn-default" ></input>
+							</div>
+							
+								#{/form}
+								</div>
+                 </div></div></div>
+  
+                 </div>
+                 </section>
+               
+ <script src="@{'/public/javascripts/bootstrap-colorpicker.min.js'}"></script>                 	
+<script type="text/javascript">
+    function PreviewImage(no) {
+        var oFReader = new FileReader();
+        oFReader.readAsDataURL(document.getElementById("uploadImage"+no).files[0]);
+
+        oFReader.onload = function (oFREvent) {
+            document.getElementById("uploadPreview"+no).src = oFREvent.target.result;
+          
+        };
+        
+    }
+    
+    $('.demo1').colorpicker();
+</script>
+	

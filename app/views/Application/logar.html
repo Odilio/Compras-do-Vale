@@ -1,0 +1,57 @@
+#{extends 'template.html'/}
+<meta property="og:image" content="@{'/public/images/infantil.jpg'}"/>
+	<style>
+		.branco {
+ background-color: #fff;
+ }
+ </style>
+	<section id="form"><!--form-->
+		<div class="container branco">
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-1">
+					<div class="login-form" itemscope><!--login form-->
+						<h2>Entrar na sua conta!</h2>
+						<form id="formlog" class="form-horizontal" action="@{Application.login()}" method="post">
+						#{if flash?.error}
+					<div class='col-sm-10' style='color:red'><h2 class='m-xs'>${flash.error}</h2></div>
+							#{/if}
+							<input itemprop="login" type="text" name="username" placeholder="Login" />
+							<input itemprop="password" type="password" name="password"  placeholder="Password" />
+							<span>
+								<input type="checkbox" class="checkbox"> 
+								Manter Logado
+							</span>
+							<button itemprop="enter" type="submit" class="btn btn-default">Entrar</button>
+						</form>
+					</div><!--/login form-->
+				</div>
+				<div class="col-sm-1">
+					<h2 class="or">OU</h2>
+				</div>
+				<div class="col-sm-4">
+					<div class="signup-form" itemscope><!--sign up form-->
+						<h2>Criar uma nova conta!</h2>
+						 #{form @Application.saveUser(user), enctype:'multipart/form-data'} 		
+							<input itemprop="complete_name" type="text" required placeholder="Nome Completo " name="user.usu_nome_completo"/>
+							<input itemprop="login" type="text" required placeholder="Login" name="user.usu_nome"/>
+							<input itemprop="email" type="email" required placeholder="Endereço de Email " name="user.usu_email"/>
+							<input itemprop="password" type="password" required placeholder="Password" name="user.usu_senha"/>
+							<button itemprop="register" type="submit" class="btn btn-default">Registrar</button>
+						#{/form}
+					</div><!--/sign up form-->
+				</div>
+			</div>
+		</div>
+	</section><!--/form-->
+	
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+
+<script>
+
+ga('ec:setAction','checkout', {
+ 'step': 1,            // A value of 1 indicates this action is first checkout step.
+ 'option': 'Cadastro de usuário'      // Used to specify additional info about a checkout stage, e.g. payment method.
+});
+ga('ecommerce:send');
+
+</script>

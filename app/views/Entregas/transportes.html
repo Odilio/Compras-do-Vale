@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="keywords" content="compras, ecommerce"/>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1">-->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<meta name="robots' content="noindex,nofollow" />
+    <title>Compras do Vale</title>
+
+    <!-- ESTILO CADASTRO -->
+  <link rel="shortcut icon" type="image/png" href="@{'/public/images/logomin.png'}" />
+
+<link href="@{'/public/stylesheets/datepicker3.css'}" media="all"
+	rel="stylesheet">
+<link href="@{'/public/stylesheets/clockpicker.css'}" media="all"
+	rel="stylesheet">
+    <!-- Bootstrap -->
+<link
+	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<link href="@{'/public/stylesheets/style2.css'}" media="all"
+	rel="stylesheet">
+	
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+   <style>
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+ @media screen and (min-width: 1100px) {
+  .container {
+    width: 1020px;
+}
+}
+@media screen and (min-width: 1300px) {
+  .container {
+    width: 1150px;
+}
+}
+
+@media screen and (min-width: 1400px) {
+  .container {
+    width: 1280px;
+}
+}
+ 
+ #page-wrapper {
+    position: inherit;
+    margin: 0 0 0 0px;
+    min-height: 1000px;
+    }
+	  </style>
+    
+  </head>
+  
+  <body>
+   <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                    <form role="search" class="navbar-form-custom" method="post" action=''>
+                        <div class="form-group">
+                            <input type="text" placeholder="Pesquisar..." class="form-control" name="busca" id="top-search">
+                        </div>
+                    </form>
+                </div>
+                
+                
+                <ul class="nav navbar-top-links navbar-right">
+                 <li>
+                        <a href="@{Application.index()}">
+                             Ir para Ecommerce
+                        </a>
+                    </li>
+                
+                    <li>
+                    #{if user}
+                        <a href="@{Entregas.logout()}">
+                            <i class="fa fa-sign-out"></i> Log out
+                        </a>
+                    #{/if}
+                    #{else} <a href="@{Entregas.logar()}" > <i class="fa fa-sign-out"></i>&nbsp; Entre</a>#{/else}    
+                    </li>
+                </ul>
+
+            </nav>
+        </div>
+  <div id="wrapper">
+
+	<section>
+	
+  	<div class="col-sm-12 col ">
+	
+
+		<div class="container">
+			<div class="row">
+				
+				
+				<div class="container margin branco">
+	 <div class="row well">
+  			
+  				<h2>Cadastro de Rota</h2>
+					<form action='@{Entregas.salvarRota()}' id="preco">
+						
+				
+					
+					<div class="form-group input-group-lg col-md-6">
+						<p><b>De:</b> </p>
+							
+							<select class="form-control" id="pro_cod_marca" name="rota.rot_cidade_origem">
+							<option value="0">&{'Escolha Local de saída'}</option>
+								<option value="Tabuleiro do Norte">Tabuleiro do Norte</option>
+								<option value="Limoeiro do Norte">Limoeiro do Norte</option>
+								<option value="São João do Jaguaribe">São João do Jaguaribe</option>
+								<option value="Fortaleza">Fortaleza</option>
+							</select>
+						</div>
+					<div class="form-group input-group-lg col-md-6">
+					<p><b>Para:</b> </p>
+							
+							<select class="form-control" id="pro_cod_marca" name="rota.rot_cidade_destino">
+							<option value="0">&{'Escolha Local de chegada'}</option>
+								<option value="Tabuleiro do Norte">Tabuleiro do Norte</option>
+								<option value="Limoeiro do Norte">Limoeiro do Norte</option>
+								<option value="São João do Jaguaribe">São João do Jaguaribe</option>
+								<option value="Fortaleza">Fortaleza</option>
+      						</select>
+      						</div>
+      						
+      						 <div class="form-group col-md-6" id="data_1">
+                                <label class="font-noraml">Data de partida </label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="rota.rot_data_partida" class="form-control" value="03/04/2016">
+                                </div>
+                            </div>
+                            
+                             <div class="  col-md-6" >
+                             <label class="font-noraml">Hora de partida </label>
+                             <div class="clockpicker input-group" data-placement="left" data-align="top" data-autoclose="true">
+                                <input type="text" class="form-control" value="09:30" name="rota.rot_data_partida">
+                                <span class="input-group-addon">
+                                    <span class="fa fa-clock-o"></span>
+                                </span>
+                            </div></div>
+                            
+                            <input type="submit" class="btn btn-default get" value="Cadastrar Rota">
+                            
+							 </div>
+						</form></div>
+						
+						
+						
+						</div>
+						
+						
+						
+			</div>
+		</div>
+	</section>
+	
+	
+	</div></div></body>
+	<script	src="@{'/public/javascripts/bootstrap-datepicker.js'}"></script>
+	<script	src="@{'/public/javascripts/clockpicker.js'}"></script>
+	<script>
+	$('.clockpicker').clockpicker();
+	 $('#data_1 .input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
+</script>
+	
+	</html>
+	

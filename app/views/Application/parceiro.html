@@ -1,0 +1,130 @@
+#{extends 'template.html'/}
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<style>
+body
+{
+    font-family: 'Open Sans', sans-serif;
+}
+.fb-profile{
+    height:50%;
+    width: 100%;  
+}
+.fb-profile img.fb-image-lg{
+    height:50%;
+    width: 100%;  
+    margin-bottom: 10px;
+}
+
+.fb-image-profile
+{
+    margin: -90px 10px 0px 50px;
+    z-index: 9;
+    width: 20%; 
+}
+
+@media (max-width:768px)
+{
+    
+.fb-profile-text>h1{
+    font-weight: 700;
+    font-size:16px;
+}
+
+.fb-image-profile
+{
+    margin: -45px 10px 0px 25px;
+    z-index: 9;
+    width: 20%; 
+}
+}
+.margin {
+	margin-top: 40px;
+}
+
+.marg{
+margin-top: 8%;
+}
+
+body {
+	background-color: white;
+}
+
+.branco {
+	background-color: #EEE;
+}
+.corfundo {
+	background-color: ${corFundo};
+}
+.img {
+    float:left;
+    margin:0 20px 10px 0;
+  }
+  
+.col-sm-9, .col-sm-3 {
+	position: relative;
+	min-height: 1px;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+</style>
+
+<div>
+	
+	</div>
+
+	<section>
+	 <div class="row">
+<div class="container">
+    <div class="fb-profile">
+        <img align="left" class="fb-image-lg" src="@{'/public/images/capaparceiro.jpg'}" alt="Profile image example"/>
+        <img align="left" class="fb-image-profile thumbnail" src="${caminhoLogo}" alt="Profile image example"/>
+        <div class="fb-profile-text">
+            <h2>${nomeParceiro}</h2>
+            <p>${frase}</p>
+        </div>
+    </div>
+</div> <!-- /container -->  
+						
+	
+	 </div>
+		<div class="container margin corfundo">
+			<div class="row">
+					
+				<div class="col-sm-12">
+					<div class="features_items"><!--features_items-->
+					
+					
+					#{paginate.list items:listaProdutos, as:'product'} 
+					<div class="col-md-3">
+                    <div class="ibox">
+                        <div class="ibox-content product-box ">
+ <a href="@{Application.productDetails(product.pro_cod_produto,product.pro_cod_produtor)}" class="product-name">
+                            <div class="productinfo">
+                               	<img src="${product.pro_caminho_ima_thumb}" alt="" />
+                            </div>
+                            <div class="product-desc">
+                                <span class="product-price">
+                                  R$ ${product.pro_preco}
+                                </span>
+                                <small class="text-muted">${product.pro_categoria}</small>
+                                <a href="@{Application.productDetails(product.pro_cod_produto,product.pro_cod_produtor)}" class="product-name"> ${product.pro_titulo_reduzido}</a>
+          
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+						  #{/paginate.list} 
+						 
+					</div><!--features_items-->
+					<center> #{paginate.controls items:listaProdutos /}   </center> 
+				
+				
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+

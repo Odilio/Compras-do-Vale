@@ -1,0 +1,134 @@
+#{extends 'template.html'/}
+
+		<link href="@{'/public/stylesheets/price-range.css'}" media="all"
+	rel="stylesheet">
+	
+<style>
+.ibox-image.product-box {
+    background-color: white;
+}
+.margin {
+	margin-top: 40px;
+}
+
+body {
+	background-color: #ddd;
+}
+
+.branco {
+	background-color: #EEE;
+}
+
+.col-sm-9, .col-sm-3 {
+	position: relative;
+	min-height: 1px;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+</style>
+
+<div>
+	</div>
+
+
+	<section>
+	
+		<div class="container margin branco">
+	 <div class="row">
+  			<div class="price-range well col-md-3"><!--price-range-->
+						<form action='@{Buscar.index()}' id="preco">
+							 <input type="text" class="span2" name="preco" value="5,400" data-slider-min="5" data-slider-max="400" data-slider-step="5" data-slider-value="[1,600]" id="sl2" ><br />
+								 <b class="pull-left">R$ 5</b> <b class="pull-right">R$ 400</b>
+
+								 
+								 <input type="submit" class="btn btn-default get" value="Buscar faixa de preço"></input>
+							
+							</form>
+							
+						</div>
+						
+						<div class="well text-center col-md-3">
+						
+						<p><b>Categoria:</b> </p>
+							
+							#{select 'produto.pro_categoria',	value:produto.pro_categoria, id:'select1',class:'form-control'}
+							#{option 'todas'}Escolha Categoria#{/option} 
+								#{option 'Feminina'}Moda Feminina#{/option} 
+								#{option 'Masculina'}Moda Masculina#{/option}
+								#{option 'Esporte'}Esporte e Lazer#{/option} 
+								#{option 'Telefones'}Telefones e Acessorios#{/option}
+								#{option 'Informatica'}Informática#{/option}
+								#{option 'Eletronicos'}Eletronicos#{/option}
+								#{option 'Casa'}Casa e Jardim#{/option} 
+								#{option 'Automoveis'}Automóveis e Motocicletas#{/option}
+								#{option 'Beleza'}Beleza e Saúde#{/option}
+							 #{/select}
+							 </div>
+							 
+							 <div class="well text-center col-md-3">
+							  <p><b>Grupo:</b> </p>
+							<select class="form-control" id="pro_cod_grupo_produto" name="gru_codigo">
+							<option value="0">&{'Escolha Grupo'}</option>
+							#{list items:listaGrupos, as:'grupo'} 
+      						    <option value="${grupo.gru_codigo}">${grupo.gru_nome}</option>
+          					 #{/list} 
+      						</select>
+							 
+                            </div>
+                            
+                             <div class="well text-center col-md-3">
+							  <p><b>Marca:</b> </p>
+							<select class="form-control" id="pro_cod_marca" name="mar_codigo">
+							<option value="0">&{'Escolha Marca'}</option>
+							#{list items:listaMarcas, as:'marca'} 
+      						    <option value="${marca.mar_codigo}">${marca.mar_nome}</option>
+          					 #{/list} 
+      						</select>
+							 
+                            </div>
+                            
+                            
+	</div>
+	</div>
+		<div class="container  branco">
+			<div class="row">
+					
+						<h2 class="title text-center">Resultado</h2>
+					
+					#{paginate.list items:listaProdutos, as:'product'} 
+					<div class="col-md-3">
+                    <div class="ibox">
+                        <div class="ibox-image product-box ">
+ <a href="@{Application.productDetails(product.pro_codigo)}" class="product-name">
+                            <div class="productinfo">
+                               	<img src="${product.pro_caminho_ima_thumb}" alt="" />
+                            </div>
+                            <div class="product-desc">
+                                <span class="product-price">
+                                  R$ ${product.pro_preco}
+                                </span>
+                                <small class="text-muted">${product.pro_categoria}</small>
+                                <a href="@{Application.productDetails(product.pro_codigo)}" class="product-name"> ${product.pro_titulo_reduzido}</a>
+          
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+						  #{/paginate.list} 
+		
+					<center> #{paginate.controls items:listaProdutos /}   </center> 
+				
+			</div>
+		</div>
+	</section>
+<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+<script	src="@{'/public/javascripts/price-range.js'}"></script>
+
+<script type="text/javascript">
+$('.span2').slider()
+<!--
+
+//-->
+</script>
+

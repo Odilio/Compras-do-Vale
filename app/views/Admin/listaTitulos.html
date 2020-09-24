@@ -1,0 +1,223 @@
+#{extends 'templateAdmin.html'/}
+
+
+	
+<section id="cart_items">
+		<div class="container">
+			<div class="row">
+					
+						
+				<div class="col-sm-12 padding-right">
+				<div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-9">
+                    <h2>	ADMIN</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="@{Admin.admin()}">Home</a>
+                        </li>
+                       <li>
+                            <a href="@{Admin.pedidos()}">titulos</a>
+                        </li>
+                      
+                    </ol>
+                </div>
+            </div>
+				 <div class="wrapper wrapper-content">
+				 
+				 <div class="ibox-title">
+                            <h5>Titulos </h5>
+                           
+                        </div>
+                        
+   <div class="ibox-content">
+   <div class="row">
+  			 #{form @Admin.buscaTitulo()}
+                                <div class="col-sm-5 m-b-xs">
+                         #{select 'titulo.tit_estado',	value:titulo?.tit_estado, id:'select1',class:'input-sm form-control input-s-sm inline'}
+							#{option 'Todos'}Todos#{/option} 
+							#{option 'aberto'}Abertos#{/option} 
+							#{option 'confirmado'}Confirmados#{/option} 
+							#{option 'cancelados'}Cancelados#{/option} 
+					   #{/select}
+                                </div>
+                                <div class="col-sm-4 m-b-xs">
+                                    <div data-toggle="buttons" class="btn-group">
+                                        <label class="btn btn-sm btn-white"> <input type="radio" id="option1" name="options"> Dia </label>
+                                        <label class="btn btn-sm btn-white active"> <input type="radio" id="option2" name="options"> Mês </label>
+                                        <label class="btn btn-sm btn-white"> <input type="radio" id="option3" name="options"> Ano </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="input-group"><input name="titulo.tit_valor" type="text" placeholder="Search" class="input-sm form-control"> <span class="input-group-btn">
+                                        <input type="submit" class="btn btn-sm btn-primary" value="Go!">  </span></div>
+                                </div>
+                                
+              #{/form} 
+                            </div>
+                            
+				<table class="table table-hover no-margins">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Codigo</td>
+							<td class="price">Tipo</td>
+							<td class="price">Forma</td>
+							<td class="quantity">Pedido</td>
+							<td class="quantity">Valor</td>
+							<td class="quantity">Estado</td>
+							<td class="quantity">Parceiro</td>
+							<td class="total">Data Emissão</td>
+							<td class="Usuario">Data Vencimento</td>
+							<td class="description">Confirmar</td>
+							<td class="description">Cancelar</td>
+						
+						</tr>
+					</thead>
+					<tbody>
+							#{paginate.list items:lista, as:'product'} 
+						<tr>
+							
+							
+							<td class="cart_description">
+								<h4><a href=""></a></h4>
+								<p>Codigo: ${product?.tit_codigo}</p>
+							</td>
+							
+							<td class="cart_price">
+								<p  class="${product?.tit_tipo =~ "receber" ? 'label label-primary' : 'label label-danger'}"> ${product?.tit_tipo}</p>
+							</td>
+							<td class="cart_price">
+								<p  > ${product?.tit_forma}</p>
+							</td>
+							<td class="cart_quantity">
+							<div class=" cart_quantity_button">
+								<h5><a href="@{Admin.mostrarPedido(product.ped_codigo)}">Ver Detalhes</a></h5>
+									<p  >${product?.ped_codigo}</p>
+								
+							</div>
+							</td>
+							<td class="cart_price">
+								<p  > ${product?.tit_valor}</p>
+							</td>
+						
+							<td >
+								 ${product?.tit_estado}
+							</td>
+							<td >
+									<a class="cart_quantity_delete" href="@{Admin.mostrarCliente(product?.tit_parceiro)}"> ${product?.tit_parceiro}</a>
+							</td>
+								<td >
+								 ${product?.tit_data_emissao}
+							</td>
+							<td >
+								 ${product?.tit_data_vencimento}
+							</td>
+							<td class="confirmar" data-toggle="modal" data-codigo="${product.tit_codigo}"  data-ped_codigo="${product.ped_codigo}">
+								<a class="cart_quantity_delete" data-toggle="modal"><i class="fa fa-check text-navy"></i>
+							</td>
+							<td class="select" data-toggle="modal" data-codigo="${product.tit_codigo}">
+								<a class="cart_quantity_delete" data-toggle="modal"><i class="fa fa-times text-navy"></i>
+							</td>
+						</tr>
+						    #{/paginate.list}
+					</tbody>
+				</table>
+				 #{paginate.controls items:lista /} 
+			</div>
+				</div><!--features_items-->
+					
+					<div class="category-tab"><!--category-tab-->
+					 		
+					</div><!--/category-tab-->
+					
+				
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+<div id="modalConfirm" class="modal fade">
+
+		<div class="modal-dialog">
+
+			<div class="modal-content col-sm-10">
+				<form class="form-horizontal" role="form"
+						action="@{Admin.confirmaTitulo()}">
+				<div class="modal-header">
+					<a href="#" class="close">&times;</a>
+					<h3>Confirmar Titulo</h3>
+				</div>
+				<div class="modal-body">
+					<p>Ao confirmar o este titulo, o mesmo não poderá ser recuperado.</p>
+					  #{select 'titulo.tit_forma',	value:titulo?.tit_forma, id:'select1',class:'form-control'}
+							#{option 'Dinheiro'}Dinheiro#{/option} 
+							#{option 'Paypal'}Paypal#{/option} 
+					   #{/select}
+					<p>Deseja confirmar esta operação?</p>
+					<p id="debug-url"></p>
+				</div>
+				<div class="modal-footer">
+
+				
+						<input type="hidden" id="titulo_codigo" name="titulo.tit_codigo" />
+						<input type="hidden" id="ped_codigo" name="titulo.ped_codigo" />
+						<button id="send" name="send" class="btn danger">Sim</button>
+						<a href="#" data-dismiss="modal" class="btn secondary">Não</a>
+					
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+<div id="modalDelete" class="modal fade">
+
+		<div class="modal-dialog">
+
+			<div class="modal-content col-sm-10">
+				<div class="modal-header">
+					<a href="#" class="close">&times;</a>
+					<h3>Cancelar Titulo</h3>
+				</div>
+				<div class="modal-body">
+					<p>Ao cancelar o este titulo, o mesmo não poderá ser recuperado.</p>
+					<p>Deseja confirmar esta operação?</p>
+					<p id="debug-url"></p>
+				</div>
+				<div class="modal-footer">
+
+					<form class="form-horizontal" role="form"
+						action="@{Admin.cancelarTitulo()}">
+						<input type="hidden" id="tit_codigo" name="titulo.tit_codigo" />
+						<input type="submit" id="send" name="send" value="Sim" class="btn danger">
+						<a href="#" data-dismiss="modal" class="btn secondary">Não</a>
+					</form>
+					
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+			
+			$(document).ready(function(){
+				   $(".select").click(function(){ 
+				 	   
+				     $("#tit_codigo").val($(this).data('codigo'));
+				    
+				     $('#modalDelete').modal('show');
+				   });
+				   
+				   $(".confirmar").click(function(){ 
+				 	   
+					     $("#titulo_codigo").val($(this).data('codigo'));
+					     $("#ped_codigo").val($(this).data('ped_codigo'));
+					     $('#modalConfirm').modal('show');
+					   });
+				   
+				});
+			
+</script>

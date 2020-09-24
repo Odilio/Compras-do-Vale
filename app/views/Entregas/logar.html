@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="keywords" content="compras, ecommerce"/>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1">-->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<meta name="robots" content="noindex,nofollow" />
+    <title>Compras do Vale</title>
+
+    <!-- ESTILO CADASTRO -->
+  <link rel="shortcut icon" type="image/png" href="@{'/public/images/logomin.png'}" />
+
+
+    <!-- Bootstrap -->
+<link
+	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<link href="@{'/public/stylesheets/style2.css'}" media="all"
+	rel="stylesheet">
+	
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script  src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.5.0/metisMenu.min.js"></script>
+   <style>
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+ @media screen and (min-width: 1100px) {
+  .container {
+    width: 1020px;
+}
+}
+@media screen and (min-width: 1300px) {
+  .container {
+    width: 1150px;
+}
+}
+
+@media screen and (min-width: 1400px) {
+  .container {
+    width: 1280px;
+}
+}
+ 
+ #page-wrapper {
+    position: inherit;
+    margin: 0 0 0 0px;
+    min-height: 1000px;
+    }
+	  </style>
+    
+  </head>
+  
+  <body>
+   <div id="page-wrapper" class="gray-bg">
+     <div class="row border-bottom">
+            <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                    <form role="search" class="navbar-form-custom" method="post" action=''>
+                        <div class="form-group">
+                            <input type="text" placeholder="Pesquisar..." class="form-control" name="busca" id="top-search">
+                        </div>
+                    </form>
+                </div>
+                
+                
+                <ul class="nav navbar-top-links navbar-right">
+                 <li>
+                        <a href="@{Application.index()}">
+                             Ir para Ecommerce
+                        </a>
+                    </li>
+                
+                    <li>
+                    #{if user}
+                        <a href="@{Entregas.logout()}">
+                            <i class="fa fa-sign-out"></i> Log out
+                        </a>
+                    #{/if}
+                    #{else} <a href="@{Entregas.logar()}" > <i class="fa fa-sign-out"></i>&nbsp; Entre</a>#{/else}    
+                    </li>
+                </ul>
+
+            </nav>
+        </div>
+  <div id="wrapper">
+
+	<section>
+	
+		<div class="container well princi">
+	 <div class="row">
+	<section id="form"><!--form-->
+		<div class="container branco">
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-1">
+					<div class="login-form"><!--login form-->
+						<h2>Entrar na sua conta!</h2>
+						<form id="formlog" class="form-horizontal" action="@{Entregas.login()}" method="post">
+						#{if flash?.error}
+					<div class='col-sm-10' style='color:red'><h2 class='m-xs'>${flash.error}</h2></div>
+							#{/if}
+							<input type="text" name="username" class="form-control" placeholder="Login" />
+							<input type="password" name="password" class="form-control"  placeholder="Password" />
+							<span>
+								<input type="checkbox" class="checkbox"> 
+								Manter Logado
+							</span>
+							<button type="submit" class="btn btn-default">Entrar</button>
+						</form>
+					</div><!--/login form-->
+				</div>
+				<div class="col-sm-1">
+					<h2 class="or">OU</h2>
+				</div>
+				<div class="col-sm-4">
+					<div class="signup-form"><!--sign up form-->
+						<h2>Criar uma nova conta!</h2>
+						 #{form @Entregas.saveUser(user), enctype:'multipart/form-data'} 		
+							<input type="text" class="form-control" required placeholder="Nome Completo " name="user.usu_nome_completo"/>
+							<input type="text" class="form-control" required placeholder="Login" name="user.usu_nome"/>
+							<input type="text" class="form-control" required placeholder="Telefone" name="user.usu_telefone"/>
+							<input type="text" class="form-control" required placeholder="Telefone" name="user.usu_telefone"/>				
+							<input type="email" class="form-control" required placeholder="Endereço de Email " name="user.usu_email"/>
+							<input type="password" class="form-control" required placeholder="Password" name="user.usu_senha"/>
+							<p><b>Cidade:</b> </p>
+							<select class="form-control" id="pro_cod_marca" name="endereco.end_cidade">
+								<option value="Tabuleiro do Norte">Tabuleiro do Norte</option>
+								<option value="Limoeiro do Norte">Limoeiro do Norte</option>
+								<option value="São João do Jaguaribe">São João do Jaguaribe</option>
+								<option value="Fortaleza">Fortaleza</option>
+							</select>
+							<p><b>Transporte:</b> </p>
+							<select class="form-control" id="pro_cod_marca" name="endereco.end_cidade">
+								<option value="Carro">Carro</option>
+								<option value="Moto">Moto</option>
+								<option value="Caminhao">Caminhão</option>
+								<option value="Topic">Topic</option>
+							</select>
+							<button type="submit" class="btn btn-default">Registrar</button>
+						#{/form}
+					</div><!--/sign up form-->
+				</div>
+			</div>
+		</div>
+	</section><!--/form-->
+	</div></div></section>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+</div></body></html>

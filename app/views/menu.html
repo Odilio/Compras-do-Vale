@@ -1,0 +1,64 @@
+<link href="@{'/public/stylesheets/menu-vertical.css'}" media="all"
+	rel="stylesheet">
+
+<div class="col-sm-2 branco">
+
+	<div class="categories-main new-categories-main categories-main-home"
+		data-role="category-content" data-spm="" data-widget-cid="widget-4">
+		<div class="categories-content-title" data-role="exclude">
+			<span>CATEGORIAS</span>
+		</div>
+	</div>
+	<div class="panel-group category-products" id="accordian">
+		<!--category-productsr-->
+
+		<ul id="menu-v">
+			<li><a href="@{Buscar.index('Feminina')}" class="panel-title" aria-expanded="true"><i
+					class="fa fa-female fa-2x fa-fw"></i>Moda Feminina</a>
+					<ul class="sub">
+					<li><a href="@{Buscar.index('Feminina')}">Acessórios</a></li>
+				<li><a href="@{Buscar.index('Feminina',1)}">Óculos</a></li>
+				<li><a href="@{Buscar.index('Feminina',16)}">Roupas</a></li>
+				<li><a href="@{Buscar.index('Feminina','Maquiagem')}">Maquiagem</a></li>
+			</ul></li>
+	
+			<li><a href="@{Buscar.index('Masculina')}" class="panel-title" aria-expanded="true"><i
+					class="fa fa-male fa-2x fa-fw"></i>Moda Masculina</a>
+				<ul class="sub">
+				<li><a href="@{Buscar.index('Masculina')}">Acessórios</a></li>
+				<li><a href="@{Buscar.index('Masculina',1)}">Óculos</a></li>
+				<li><a href="@{Buscar.index('Masculina',16)}">Roupas</a></li>
+				</ul></li>
+			<li><a href="@{Buscar.index('Esporte')}" class="panel-title" aria-expanded="true"><i
+					class="fa fa-futbol-o fa-2x fa-fw"></i>Esporte e Lazer</a>
+				<ul class="sub">
+				<li><a href="@{Buscar.index('Esporte')}">Basquete</a></li>
+				</ul></li>
+			<li><a href="@{Buscar.index('Telefones')}" class="panel-title" aria-expanded="true"><i
+					class="fa fa-mobile fa-2x fa-fw"></i>Telefones e Acessórios</a></li>
+			<li><a href="@{Buscar.index('Eletronicos')}" class="panel-title" aria-expanded="true"><i
+					class="fa fa-television fa-2x fa-fw"></i>Eletrônicos</a>
+				<ul class="sub">
+				<li><a href="@{Buscar.index('Eletronicos','Acessorios')}">Acessórios</a></li>
+				</ul></li>
+			<li><a href="@{Buscar.index('Informatica')}" class="panel-title" aria-expanded="true"><i
+						class="fa fa-laptop fa-2x fa-fw"></i>Informática</a>
+				<ul class="sub">
+				<li><a href="@{Buscar.index('Informatica')}">Acessórios</a></li>
+				
+				</ul></li>
+				
+				<li><a href="@{Buscar.index('Casa')}" class="panel-title" aria-expanded="true"><i
+						class="fa fa-bed fa-2x fa-fw"></i>Casa e Jardim</a>
+						</li>
+				
+				<li><a href="@{Buscar.index('Automoveis')}" class="panel-title" aria-expanded="true"><i
+						class="fa fa-car fa-2x fa-fw"></i>Automóveis e Motocicletas</a>
+						</li>
+		</ul>
+
+
+	</div>
+	<!--/category-products-->
+
+</div>

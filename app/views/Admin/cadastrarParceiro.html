@@ -1,0 +1,224 @@
+#{extends 'templateAdmin.html'/}
+
+<div class="container">
+	<div class="row">
+	           <div class="col-sm-9 padding-right">
+                <div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-9"><h2> &{'Parceiros'}</h2>		</div></div>
+                     
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                        
+                        	<form data-persist="garlic" action="@{Admin.addParceiro()}"  enctype="multipart/form-data" method="post" id="formpro">
+ 	
+ 	
+  
+ 	
+ 		
+			
+				<input type="hidden"  id="for_codigo" name="parceiro.par_codigo" value="${parceiro?.par_codigo}"/>
+			
+				<div class="error hide">
+					Oops, algo deu errado.
+					<ul></ul>
+				</div>
+				<div class="row">
+				
+					<div class="view-product">
+					 <img id="uploadPreview1" 
+											src="${parceiro?.par_caminho_ima}" /><br />
+											<span class="btn btn-primary btn-file">
+											Escolher Imagem
+											 <input
+											class="upload" id="uploadImage1" type="file"
+											name="parceiro.par_imagem" onchange="PreviewImage(1);" />
+											</span>
+											</div>
+											
+					<div class="form-group input-group-lg col-md-6">
+						<div class="radio">
+							<label><div class="iradio_polaris checked"
+									aria-checked="false" aria-disabled="false"
+									style="position: relative;">
+									<input checked="checked" id="fisica"
+										name="checkout-user-radio" type="radio" value="pessoaFisica"
+										style="position: absolute; top: 10%; left: 10%; display: block; width: 80%; height: 80%;">
+								
+								</div>Pessoa Física</label>
+						</div>
+					</div>
+					<div class="form-group input-group-lg col-md-6">
+						<div class="radio">
+							<label><div class="iradio_polaris" aria-checked="false"
+									aria-disabled="false" style="position: relative;">
+									<input id="juridica"
+										name="checkout-user-radio" type="radio" value="pessoaJuridica"
+										style="position: absolute; top: 10%; left: 10%; display: block; width: 80%; height: 80%;">
+								
+								</div>Pessoa Jurídica</label>
+						</div>
+					</div>
+					<div class="form-group input-group-lg col-md-6">
+						<label>Login *</label><input class="form-control" required
+							id="user_login" name="parceiro.par_login"
+							placeholder="Seu Login" type="text" value="${parceiro?.par_login}">
+					</div>
+					<div class="form-group input-group-lg col-md-6"
+						id="checkout-payment-user-cpf">
+						<label>Email *</label><input class="form-control"
+							name="parceiro.par_email" required id="cpf" placeholder=""
+							type="text" value="">
+					</div>
+					
+					<div class="form-group input-group-lg col-md-6">
+						<label>Nome *</label><input class="form-control" required
+							id="user_name" name="parceiro.par_nome"
+							placeholder="Seu nome para exposição" type="text" value="${parceiro?.par_nome}">
+					</div>
+					<div class="form-group input-group-lg col-md-6"
+						id="checkout-payment-user-cpf">
+						<label>CPF *</label><input class="form-control"
+							name="parceiro.par_cpf" required id="cpf" placeholder=""
+							type="text" value="">
+					</div>
+					
+					<div class="form-group input-group-lg col-md-12">
+						<label>Nome Completo *</label><input class="form-control" required
+							id="user_name" name="parceiro.par_nome_completo"
+							placeholder="Seu nome completo" type="text" value="${parceiro?.par_nome_completo}">
+					</div>
+					
+					<div class="form-group input-group-lg col-md-6">
+						<label>Telefone *</label>
+						<input class="form-control" id="number" name="parceiro.par_celular" placeholder="" type="text" value="">
+					</div>
+							
+					<div class="form-group input-group-lg col-md-6">
+						<label>CEP *</label><input class="form-control"
+							name="parceiro.par_cep" required id="user_zipcode"
+							placeholder="" type="text" value="">
+					</div>
+					<div class="form-group input-group-lg col-md-8">
+						<label>Endereço *</label><input class="form-control"
+							name="parceiro.par_endereco" required id="user_address"
+							placeholder="" type="text" value="">
+					</div>
+					<div class="form-group input-group-lg col-md-4">
+						<label>Número *</label><input class="form-control"
+							name="parceiro.par_numero" required id="number" placeholder=""
+							type="text" value="">
+					</div>
+					<div class="form-group input-group-lg col-md-6">
+						<label>Complemento</label><input class="form-control"
+							name="parceiro.par_complemento" id="complement" placeholder=""
+							type="text" value="">
+					</div>
+					<div class="form-group input-group-lg col-md-6">
+						<label>Bairro *</label><input class="form-control"
+							name="parceiro.par_bairro" required id="suburb" placeholder=""
+							type="text" value="">
+					</div>
+					<div class="form-group input-group-lg col-md-9">
+						<label>Cidade *</label><input class="form-control"
+							name="parceiro.par_cidade" required id="city" placeholder=""
+							type="text" value="">
+					</div>
+					<div class="form-group input-group-lg col-md-3">
+						<label>UF *</label><input class="form-control"
+							name="parceiro.par_uf" required id="state" maxlength="2"
+							placeholder="" type="text" value="">
+					</div>
+					
+						<div class="form-group input-group-lg col-md-6">
+					<p><b>Tipo Parceiro:</b> </p>
+							
+							<select class="form-control" id="pro_cod_marca" name="">
+							<option value="0">&{'Escolha tipo do parceiro'}</option>
+								<option value="2">Parceiro Fornecedor</option>
+								<option value="4">Parceiro Revendedor</option>
+									</select>
+      						</div>
+
+				</div>
+			 <input type="submit" id="criar" value="&{'salvar'}" class="btn btn-default" ></input>
+		</form> 
+					<br>
+		
+		
+		
+		
+ <table class="table table-hover">
+ <thead>
+     <tr >
+     <th>&{'Nome'}</th>
+     <th>&{'Telefone'}</th>
+     <th>&{'Cidade'}</th>
+     <th>&{'Editar'}</th>
+	
+     </tr>
+</thead>
+<tbody class="animsition">   
+ 
+  #{list items:lista, as:'product'}
+            <tr>
+		<td class="project-title">
+  			<a data-toggle="tooltip" title="&{'tooltipOpen'}" class="animsition-link" href="" > ${product?.par_nome}   </a>
+  		 </td>
+  		 	<td class="project-title">
+  			<a data-toggle="tooltip" title="&{'tooltipOpen'}" class="animsition-link" href="" > ${product?.par_celular}   </a>
+  		 </td>
+  		 	<td class="project-title">
+  			<a data-toggle="tooltip" title="&{'tooltipOpen'}" class="animsition-link" href="" > ${product?.par_cidade}   </a>
+  		 </td>
+  <td >
+  	 	<a href="#cadastro" class="btn btn-white btn-sm announce"  data-titulo="${product.par_nome}" data-codigo="${product.par_codigo}" data-image="${product.par_caminho_ima}" data-toggle="tooltip"  ><i class="fa fa-pencil-square-o fa-2x"></i> Editar </a>
+  	 </td>
+  	 	
+  	 </tr>    
+               #{/list}
+ 	 </tbody>
+  		</table>
+ 
+		<br>
+	</div>
+	
+	
+	
+	<br>
+</div></div></div></div>
+	
+
+
+ <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js" ></script>
+ <script>
+$("#formpro").validate();
+</script>
+<script>
+$(document).ready(function(){
+	   $(".announce").click(function(){ 
+	     
+	     $("#for_codigo").val($(this).data('codigo'));
+	     $("#titulo").val($(this).data('titulo'));
+	     $("#subtitulo").val($(this).data('subtitulo'));
+	     document.getElementById("uploadPreview1").src =  $(this).data('image');
+	   
+	   
+	   });
+	});
+
+</script> 
+
+<script type="text/javascript">
+    function PreviewImage(no) {
+        var oFReader = new FileReader();
+        oFReader.readAsDataURL(document.getElementById("uploadImage"+no).files[0]);
+
+        oFReader.onload = function (oFREvent) {
+            document.getElementById("uploadPreview"+no).src = oFREvent.target.result;
+          
+        };
+        
+    }
+    
+  
+</script>

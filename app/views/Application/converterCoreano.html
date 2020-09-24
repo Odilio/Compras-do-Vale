@@ -1,0 +1,101 @@
+#{extends 'templateCoreano.html'/}
+<style>
+body {
+background-color: white;
+}
+</style>
+	<section>
+		<div class="container">
+			<div class="row col-sm-12">
+					
+				
+			
+				<div class="col-sm-8 padding-right">
+				<h1>	Converta letras em hangul para alfabeto romanizado </h1>
+				 <div class="wrapper wrapper-content">
+			<form id="formpro">		
+		<textarea cols="80" name="inp" id="inp" name="capitulo.cap_texto" rows="12">
+		
+		</textarea>
+            
+            <p class="buttons  button">
+				<button type="submit" name="log-me-in" id="convert" tabindex="5"
+					class="btn btn-lg btn-green">&{'Converter'}</button>
+					</p>
+         
+            <textarea cols="80" id="bars" name="capitulo.cap_texto" rows="12">
+				
+		</textarea>
+		
+		<ul id="bars">
+ 
+						</ul>
+       </form>
+
+	
+				</div><!--features_items-->
+					
+					<div class="category-tab"><!--category-tab-->
+					 		
+					</div><!--/category-tab-->
+					
+				
+				</div>
+				
+				<div>
+				
+				<div class="col-sm-4 padding-right">
+				<h2>	Lista de músicas para setar transliteração </h2>
+				 <input class="btn btn-lg btn-green" type="button" id="myButton" value="Beige – Your song Hangul"/>
+				 <input class="btn btn-lg btn-green" type="button" id="myButton2" value="Jung Joon Young"/>
+				 </div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	
+	
+<script type="text/javascript">
+
+var button_my_button = "#myButton";
+$(button_my_button).click(function(){
+	   var createAction = #{jsAction @inserirLetra() /}
+		$.post(createAction(), function(data) {
+			
+	                $("#inp").html(data.fre_valor);
+	                        
+		});
+		
+return false;
+});
+
+var button_my_button = "#myButton2";
+$(button_my_button).click(function(){
+	   var createAction = #{jsAction @inserirLetraJung() /}
+		$.post(createAction(), function(data) {
+			
+	                $("#inp").html(data.fre_valor);
+	                        
+		});
+		
+return false;
+});
+
+var button_my_button = "#convert";
+$(button_my_button).click(function(){
+		   var createAction = #{jsAction @conversao(':coreano') /}
+			$.post(createAction({coreano: $('#inp').val()}), function(data) {
+				
+		                $("#bars").html(data.fre_valor);
+		                        
+			});
+			
+	return false;
+	 });
+	   
+	   
+	   
+	   
+</script>

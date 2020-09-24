@@ -1,0 +1,91 @@
+#{extends 'templateEntrega.html'/}
+
+	<section>
+		<div class="container">
+			<div class="row">
+					
+			
+				<div class="col-sm-12 padding-right">
+				
+				 <div class="wrapper wrapper-content">
+					
+					<div class="row">
+     			 	<div class="ibox-content">
+		<div class="ibox-title">
+			<h3>Rotas abertas</h3> 
+		</div>
+     			 
+     			 	<table class="table table-hover no-margins">
+					<thead>
+						<tr class="cart_menu">
+						<td class="image"></td>
+							<td class="image">Origem</td>
+							
+							<td class="price">Destino</td>
+							<td class="quantity">Data Pedido</td>
+							<td class="total">Data Limite Chegada</td>
+							<td class="total">Frete</td>
+							<td class="Usuario">Comprador</td>
+							<td class="total">Detalhes</td>
+							<td class="total">Candidatar-se</td>
+						
+						</tr>
+					</thead>
+					<tbody>
+							#{paginate.list items:rotas, as:'product'} 
+						<tr>
+						
+							<td class="cart_price">
+								<form id="myForm">
+								<input name="radioName" id="${product?.rot_codigo}"  value="${product?.rot_codigo}" type="checkbox">
+								</form>
+							</td>
+							
+							<td class="cart_description">
+								<a ><p style="color: blue;">${product?.rot_cidade_origem}</p></a>
+								
+							</td>
+						
+							
+						
+							<td class="cart_price">
+								<a ><p  style="color: red;"> ${product?.rot_cidade_destino}</p></a>
+							</td>
+							<td class="cart_quantity">
+							<div class=" cart_quantity_button">
+								
+									<p > ${product?.rot_data_partida}</p>
+								
+							</div>
+						</td>
+							<td >
+								<p id ="status">${product?.rot_data_chegada}</p>
+							</td>
+							<td >
+								<p id ="frete">R$ 3,00 </p>
+							</td>
+								<td >
+						<p>${product?.rot_nome_completo}</p>
+							</td>
+							<td>
+								<a class="cart_quantity_delete" href="@{Perfil.mostrarPedido(product.ped_codigo)}"><i class="fa fa-search"></i></a>
+							</td>
+							<td>
+								<a class="cart_quantity_delete" href="@{Admin.itensPedidos(product.rot_codigo)}"><i class="fa fa-search"></i></a>
+							</td>
+						</tr>
+						    #{/paginate.list}
+					</tbody>
+				</table>
+				 #{paginate.controls items:rotas /} 
+</div>
+
+     
+				</div><!--features_items-->
+					
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	

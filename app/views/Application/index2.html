@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="pt" xml:lang="pt">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description"
+	content="Compre online ou com nossos parceiros, óculos, eletrônicos, moda feminina, roupas, Automotivo,produtos para beleza, moda masculina e tudo com os melhores preços">
+<meta name="title"
+	content="Compras do Vale - Econtre tudo em moda feminina, masculina e eletronicos sem sair de casa">
+<meta name="author" content="">
+<meta http-equiv="content-language" content="pt-br">
+<meta name="keywords"
+	content="sem sair de casa,compras, ecommerce, vale, feminina,Compras do Vale, Encontre,  Automotivo, Telefones, Acessórios, Computadores, Eletrônicos,
+ Moda, Beleza, Saúde, Casa, Jardim, " />
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta property="og:title"
+	content="Encontre tudo o que procura, sem sair de casa!" />
+<meta property="og:description" content="Compre acessórios, moda feminina, produtos para beleza e mais!" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:url" content="https://www.comprasdovale.com.br" />
+<title>Compre acessórios, moda feminina, produtos para beleza e
+	mais!</title>
+<link rel="canonical" href="http://comprasdovale.com.br" />
+<link rel="publisher"
+	href="https://plus.google.com/u/2/102630365333157732957">
+<link rel="shortcut icon" type="image/png"
+	href="@{'/public/images/logomin.png'}" />
+<link
+	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+	media="screen" rel="stylesheet">
+<link href="@{'/public/stylesheets/main.css'}" media="all"
+	rel="stylesheet">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-75841061-1', 'auto');
+  ga('require', 'ecommerce');
+  ga('send', 'pageview');
+
+</script>
+<style>
+h3 {
+	font-size: 12px;
+}
+.top-deal-product {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+    margin-left: 0;
+}
+</style>
+</head>
+
+<body>
+	#{include 'top2.html'/}
+
+
+
+<div class="container">
+	<div class="col-sm-12">
+
+		#{include 'menu2.html'/}
+
+		<div class="col-sm-7 branco">
+			<section class="jk-slider">
+				<div id="carousel-example" class="carousel slide"
+					data-ride="carousel">
+					<ol class="carousel-indicators">
+						<li data-target="#carousel-example" data-slide-to="0"
+							class="active"></li>
+						<li data-target="#carousel-example" data-slide-to="1"></li>
+						<li data-target="#carousel-example" data-slide-to="2"></li>
+					</ol>
+
+					<div class="carousel-inner">
+
+						<div class="item active">
+							<div class="hero"></div>
+							<div class=""></div>
+							<a href="#"><img height="100%" width="100%"
+								src="@{'/public/images/banner4.jpg'}" alt="compras de esportes" /></a>
+
+						</div>
+						<div class="item">
+							<div class="hero"></div>
+
+							<div class=""></div>
+							<a href="#"><img height="100%" width="100%"
+								src="@{'/public/images/estilo.jpg'}" alt="compras de estilo" /></a>
+
+						</div>
+						<div class="item">
+							<div class="hero"></div>
+							<div class=""></div>
+							<a href="#"><img height="100%" width="100%"
+								src="@{'/public/images/infantil.jpg'}" alt="compras de infantil" /></a>
+
+						</div>
+					</div>
+
+					<a class="left carousel-control" href="#carousel-example"
+						data-slide="prev"> <span
+						class="glyphicon glyphicon-chevron-left"></span>
+					</a> <a class="right carousel-control" href="#carousel-example"
+						data-slide="next"> <span
+						class="glyphicon glyphicon-chevron-right"></span>
+					</a>
+				</div>
+
+			</section>
+		</div>
+		
+		<div class="col-sm-3 ">
+			<div class="top-deal-product">
+ 				<img height="100%" width="100%" src="@{'/public/images/lateral.jpg'}" alt="">
+ </div>
+
+			</div>
+	</div>
+</div>
+<section>
+	<div class="container margin branco">
+		<div class="row">
+
+
+			<div class="col-sm-12 ">
+				<div class="features_items">
+					<!--features_items-->
+
+					<hr>
+
+					#{paginate.list items:listaProdutos, as:'product'}
+					<div class="col-md-3">
+						<div class="ibox">
+							<div class="ibox-image product-box " itemscope>
+								<a href="@{Application.productDetails(product.pro_codigo)}"
+									class="product-name">
+									<div class="productinfo">
+										<img alt="${product.pro_titulo}" height="100%" width="100%"
+											src="${product.pro_caminho_ima_thumb}" />
+									</div>
+									<div class="product-desc">
+										<span class="product-price" itemprop="price"> R$
+											${product.pro_preco} </span>
+										<h3 class="text-muted">${product.pro_categoria}</h3>
+										<a href="@{Application.productDetails(product.pro_codigo)}"
+											class="product-name" itemprop="name">
+											${product.pro_titulo_reduzido}</a>
+
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+					#{/paginate.list}
+
+				</div>
+				<!--features_items-->
+				<div class="center-align">#{paginate.controls
+					items:listaProdutos /}</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container margin branco">
+		<div class="row">
+			<div class="recommended_items">
+				<!--recommended_items-->
+				<h3 class="title text-center">Produtos mais recomendados</h3>
+				<hr>
+				<div id="recommended-item-carousel" class="carousel slide"
+					data-ride="carousel">
+					<div class="carousel-inner">
+						<div class="item active">
+							#{list items:maisVendidos, as:'product'}
+							<div class="col-md-3">
+								<div class="ibox">
+									<div class="ibox-image product-box " itemscope>
+										<a href="@{Application.productDetails(product.pro_codigo)}"
+											class="product-name">
+											<div class="productinfo">
+												<img height="100%" width="100%"
+													src="${product.pro_caminho_ima_thumb}"
+													alt="${product.pro_titulo}" />
+											</div>
+											<div class="product-desc">
+												<span class="product-price" itemprop="price"> R$ ${product.pro_preco}
+												</span>
+												<h3 class="text-muted">${product.pro_categoria}</h3>
+												<a href="@{Application.productDetails(product.pro_codigo)}"
+													class="product-name" itemprop="name">
+													${product.pro_titulo}</a>
+
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+							#{/list}
+
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+			<!--/recommended_items-->
+
+		</div>
+	</div>
+</section>
+
+
+</body>
+</html>

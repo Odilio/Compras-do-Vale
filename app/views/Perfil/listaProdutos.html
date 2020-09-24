@@ -1,0 +1,43 @@
+#{extends 'templateAdmin.html'/}
+   
+	
+
+	
+	<section>
+		<div class="container">
+			<div class="row">
+				
+				
+				<div class="col-sm-9 padding-right">
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">Features Items</h2>
+						
+						
+					
+					#{list items:listaProdutos, as:'product'}
+					<div class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+										<img src="${product.pro_caminho_ima}" alt="" />
+										
+										<h2 style="color: red;">$ ${product.pro_preco}</h2>
+										<p>${product.pro_titulo}</p>
+										
+										<a href="@{Admin.editarProduto(product)}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Editar</a>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+						#{/list}
+					</div><!--features_items-->
+					
+	
+					
+					
+					
+				</div>
+			</div>
+		</div>
+	</section>

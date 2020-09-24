@@ -1,0 +1,50 @@
+#{extends 'template.html'/}
+   
+	<link href="@{'/public/stylesheets/fiverr.css'}" media="all"
+	rel="stylesheet">
+	<style>
+	body{
+	background-color:#eee;
+}
+section {
+    margin-bottom: 11%;
+}
+	</style>
+
+	
+	<section>
+		<div class="container">
+			<div class="row">
+				
+				#{include 'menuConta.html'/}
+				
+				<div class="col-sm-9 padding-right">
+					<div class="features_items"><!--features_items-->
+						 <div class="db-summary db-order-stats">
+     
+        <a href="@{Perfil.aguardandoPagamento()}">${qtdPagamento}<small>Você tem ${qtdPagamento} pedidos<br> esperando seu pagamento</small></a>
+
+        <a href="@{Perfil.aguardandoEnvio()}">${qtdParaEnvio}<small>Você tem ${qtdParaEnvio} pedidos <br>aguardando envio</small></a>
+
+        <a href="@{Perfil.enviados()}">${qtdEnviados}<small>Você tem ${qtdEnviados} pedidos enviados</small></a>
+        
+        <a href="@{Perfil.concluidos()}">${qtdFinalizado}<small>Você tem ${qtdFinalizado} pedidos completos</small></a>
+        
+        <a href="">${qtdCancelados}<small>Você tem ${qtdCancelados} pedidos cancelados</small></a>
+     
+
+</div>
+					<!-- <a class="btn-default get btn" href="">	Cadastrar Endereço</a> -->
+					</div><!--features_items-->
+					
+					<div class="category-tab"><!--category-tab-->
+						
+					</div><!--/category-tab-->
+					
+				
+					
+				</div>
+			</div>
+		</div>
+	</section>
+	

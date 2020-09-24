@@ -1,0 +1,150 @@
+#{extends 'template.html'/}
+   
+	<style>
+	.ibox-title {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #ffffff;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 4px 0px 0;
+    color: inherit;
+    margin-bottom: 0;
+    padding: 14px 15px 7px;
+    min-height: 48px;
+}
+.ibox-content {
+    background-color: #ffffff;
+    color: inherit;
+    padding: 15px 20px 20px 20px;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 0px;
+}
+.bloco {
+    width: 90%;
+}
+#cart_items .cart_info .menu-conta {
+    background: #eee;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+}
+
+.register-req, .heading {
+    font-size: 20px;
+    margin-bottom: 35px;
+    padding: 0px 25px;
+    font-family: 'Roboto', sans-serif;
+}
+	</style>
+
+	
+<section id="cart_items">
+		<div class="container">
+			<div class="row">
+				
+					#{include 'menuConta.html'/}
+					
+				<div class="col-sm-9 padding-right">
+				 <div class="wrapper wrapper-content">
+				 
+					<h2 class="heading">Seus Pedidos Enviados para Entrega</h2>
+		
+		      <div class="table-responsive cart_info ibox-content">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="menu-conta">
+							<td class="image">Pedidos</td>
+							
+						
+							<td class="quantity">Quantidade</td>
+							<td class="total">Status</td>
+								<td class="price">Preço</td>
+							<td class="description">Data</td>
+							<td class="total">Itens</td>
+							<td class="total">Rastreamento</td>
+							
+							
+						</tr>
+					</thead>
+					<tbody>
+					#{paginate.list items:lista, as:'product'} 
+						 
+						<tr>
+							
+							
+							<td class="cart_description">
+								<h5><a href="@{Perfil.pagamento(product.ped_codigo)}">Ver Detalhes</a></h5>
+								<p>Codigo: ${product?.ped_codigo}</p>
+							</td>
+						
+							
+						
+							
+							<td class="cart_quantity">
+							<div class=" cart_quantity_button">
+								
+									<p  style="color: red;">${product?.ped_quantidade}</p>
+								
+							</div>
+						</td>
+							<td >
+								<p >${product?.ped_status}</p>
+							</td>
+							<td class="cart_price">
+								<h4 style="color: #e62e04;">$ ${product?.ped_valor}</h4>
+							</td>
+							<td >
+								 ${product?.ped_data}
+							</td>
+							<td>
+								<center><a class="cart_quantity_delete" href="@{Perfil.itensPedidos(product.ped_codigo)}"><i class="fa fa-search"></i></a></center>
+							</td>
+							<td>
+								<p >${product?.ped_rastreamento}</p>
+							</td>
+							
+							
+						</tr>
+						    #{/paginate.list} 
+						 
+					</tbody>
+					
+				</table>
+				 #{paginate.controls items:lista /} 
+			</div>
+				</div><!--features_items-->
+					
+					<div class="category-tab"><!--category-tab-->
+					 		
+					</div><!--/category-tab-->
+					
+				
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!--  <script type = "text/javascript">
+
+ 
+	 $(document).ready(function() {
+		 var backgrounds = [
+		                    "8px solid rgb(64, 184, 210)", 
+		                    "8px solid rgb(227, 12, 142)"];
+		 var current = 0;
+		 function nextBackground() {
+			 $(".category-products").css("border", 
+		        backgrounds[current = ++current % backgrounds.length]);
+
+		        setTimeout(nextBackground, 1000);
+		    }
+		    setTimeout(nextBackground, 1000);
+    $(".category-products").css("border", backgrounds[1]);
+	 });
+      </script> -->

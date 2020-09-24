@@ -1,0 +1,255 @@
+#{extends 'templateAdmin.html'/}
+
+
+	
+<section id="cart_items">
+		<div class="container">
+			<div class="row">
+					
+				<div class="col-sm-12 padding-right">
+				<div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-9">
+                    <h2>	ADMIN</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="@{Admin.admin()}">Home</a>
+                        </li>
+                       <li>
+                            <a href="@{Admin.pedidos()}">pedidos</a>
+                        </li>
+                      
+                    </ol>
+                </div>
+            </div>
+				 <div class="wrapper wrapper-content">
+				 	 <div class="ibox-title">
+                            <h5>Pedidos </h5>
+                           
+                        </div>
+   <div class="ibox-content">
+				<table class="table table-hover no-margins">
+					<thead>
+						<tr class="cart_menu">
+						<td class="image"></td>
+							<td class="image">Pedidos</td>
+							
+							<td class="price">Preço</td>
+							<td class="quantity">Quantidade</td>
+							<td class="total">Status</td>
+							<td class="total">Frete</td>
+							<td class="Usuario">Comprador</td>
+							<td class="description">Data</td>
+							<td class="total">Itens</td>
+							<td class="total">Detalhes</td>
+						
+						</tr>
+					</thead>
+					<tbody>
+							#{paginate.list items:lista, as:'product'} 
+						<tr>
+						
+							<td class="cart_price">
+								<form id="myForm">
+								<input name="radioName" id="${product?.ped_codigo}"  value="${product?.ped_codigo}" type="checkbox">
+								</form>
+							</td>
+							
+							<td class="cart_description">
+								<h4><a href="">${product?.ped_estado}</a></h4>
+								<p>Codigo: ${product?.ped_codigo}</p>
+							</td>
+						
+							
+						
+							<td class="cart_price">
+								<p  style="color: red;">R$ ${product?.ped_valor}</p>
+							</td>
+							<td class="cart_quantity">
+							<div class=" cart_quantity_button">
+								
+									<p >${product?.ped_quantidade}</p>
+								
+							</div>
+						</td>
+							<td >
+								<p  class="${product?.ped_status =~ "Cancelado" ? 'label label-danger' : 'label label-primary'}"> ${product?.ped_status}</p>
+							</td>
+							<td >
+								<p id ="frete"> ${product?.ped_tipo_frete}</p>
+							</td>
+								<td >
+							<a class="cart_quantity_delete" href="@{Admin.mostrarCliente(product.usu_codigo)}">	 ${product?.ped_nome_usuario}</a>
+							</td>
+							<td >
+								 ${product?.ped_data}
+							</td>
+							<td>
+								<a class="cart_quantity_delete" href="@{Admin.itensPedidos(product.ped_codigo)}"><i class="fa fa-search"></i></a>
+							</td>
+							<td>
+								<a class="cart_quantity_delete" href="@{Admin.mostrarPedido(product.ped_codigo)}"><i class="fa fa-search"></i></a>
+							</td>
+							
+						</tr>
+						    #{/paginate.list}
+					</tbody>
+				</table>
+				 #{paginate.controls items:lista /} 
+			</div>
+				</div><!--features_items-->
+				
+				
+				 <div class="wrapper wrapper-content">
+				 	 <div class="ibox-title">
+                            <h5>Ações - cada ação altera o status do pedido selecionado </h5>
+                           
+                        </div>
+                        
+                       
+   <div class="ibox-content">
+   
+   						<div class="row pedidoid">
+                          <h5>Pedido -  </h5>
+                       </div>
+                       <div class="row">
+					<div class="col-sm-2">
+                       	<form id="formstatusconcluido">
+						<input type="submit" class="btn btn-default update" value="Produto Entregue">
+						</form>
+						</div>
+						<div class="col-sm-2">
+						<form id="formstatusenvio">
+						 <input type="submit" class="btn btn-default update" value="Aguardando Envio">
+						 </form>
+						 </div>
+						 <div class="col-sm-2">
+						  <form id="formenviado">
+						<input type="submit" class="btn btn-default update" value="Enviado">
+						</form>
+						</div>
+						<div class="col-sm-2">
+						 <form id="formaguardando">
+						<input type="submit" class="btn btn-default update" value="Aguardando Pagamento">
+						</form>
+						</div>
+						<div class="col-sm-2">
+						<form id="formstatuscancelado">
+						<input type="submit" class="btn btn-default update" value="Venda Cancelada">
+					</form>
+					</div></div>
+				</div></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<script>
+var pedidos = "";
+
+$('#myForm input').on('change', function() {
+	  $( ".pedidoid" ).html( "<h5>Pedido - ");
+	  pedidos = "";
+	$('input[name="radioName"]:checked').each(function() {
+		pedidos = pedidos + this.value + "-" ;
+		   $( ".pedidoid" ).append(  this.value + " - " );
+		 });
+	 $( ".pedidoid" ).append(  " </h5>" );
+	});
+	
+	
+	
+$('#formpro').submit(function() {
+	   var createAction = #{jsAction @statusProdutoEntregue(':rev_texto') /}
+		$.post(createAction({rev_texto: pedidos}), function(data) {
+			
+	                $("#bars").html("<img width='100%' src='" + data.car_caminho_ima + "'></img>");
+	            
+	                $('#inp').focus();
+	                $('#status').text("foi");
+	                
+	                 
+	                var sum = 0.0;
+	        	    var quantity = 0;
+	        	    $('.preco').each(function() {
+	        	        var price = $(this);
+	        	        var q = price.closest('tr').find('.quntity-input').val();
+	        	        sum += parseFloat(price.val()) * parseInt(1);
+	        	        quantity += parseFloat(q);
+	        	      
+	        	    });
+	        	    $('.subtotal').html(sum);
+	        	    $('.total').html(parseInt(sum) + parseInt($('.frete').text()));
+	        	    
+		});
+		
+return false;
+});	
+
+$('#formstatusconcluido').submit(function() {
+	   var createAction = #{jsAction @statusProdutoEntregue(':rev_texto') /}
+		$.post(createAction({rev_texto: pedidos}), function(data) {
+			
+			 $('#status').text("Concluido");
+			
+		});
+		
+return false;
+});	
+
+
+$('#formstatusenvio').submit(function() {
+	   var createAction = #{jsAction @statusProdutoParaEnvio(':rev_texto') /}
+		$.post(createAction({rev_texto: pedidos}), function(data) {
+			
+			  $('#status').text("Aguardando Envio");
+		});
+		
+return false;
+});	
+
+$('#formenviado').submit(function() {
+	   var createAction = #{jsAction @statusProdutoEnviado(':rev_texto') /}
+		$.post(createAction({rev_texto: pedidos}), function(data) {
+			
+			  $('#status').text("Enviado");
+		});
+		
+return false;
+});	
+
+$('#formstatuscancelado').submit(function() {
+	   var createAction = #{jsAction @statusProdutoCancelado(':rev_texto') /}
+		$.post(createAction({rev_texto: pedidos}), function(data) {
+			
+			  $('#status').text("Cancelado");
+		});
+		
+return false;
+});	
+
+$('#formstatuspagamento').submit(function() {
+	   var createAction = #{jsAction @statusProdutoAguardandoPagamento(':rev_texto') /}
+		$.post(createAction({rev_texto: pedidos}), function(data) {
+			
+			  $('#status').text("Aguardando Pagamento");
+		});
+		
+return false;
+});	
+</script>
+
+
+
+<script type="text/javascript">
+		
+	 
+</script>
+
+
+<!--
+   alert($('input[name=radioName]:checked', '#myForm').val()); 
+	   $( ".pedidoid" ).html( "<h5>Pedido - "+$('input[name=radioName]:checked', '#myForm').val()+" </h5>" );
+ console.log($('input[name="radioName"]:checked').serialize());
+$('input[name="radioName"]:checked').each(function() {
+	   alert(this.value); 
+	 }); -->

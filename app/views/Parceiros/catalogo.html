@@ -1,0 +1,145 @@
+#{extends 'templateCoreano.html'/}
+  	<style>
+  	.productinfo h2{
+	color: #D7142F;
+	font-family: 'Roboto', sans-serif;
+	font-size: 24px;
+	font-weight: 700;
+}
+.product-overlay h2{
+	color: #fff;
+	font-family: 'Roboto', sans-serif;
+	font-size: 24px;
+	font-weight: 700;
+}
+
+
+.productinfo p{
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #312B2C;
+}
+
+.productinfo img{
+  width: 100%;
+      margin-bottom: 20px;
+  
+}
+
+.product-box{
+ margin-bottom: 20px;
+ margin-top: 25px;
+}
+
+.features_items{
+margin-top: 15px;
+}
+
+.productinfo{
+ position:relative;
+}
+
+.product-overlay {
+  background:rgba(100,100,100,0.6);
+  top: 0;
+  display: none;
+  height: 0;
+  position: absolute;
+  transition: height 500ms ease 0s;
+  width: 100%;
+  display: block;
+  opacity:;
+}
+
+.single-products:hover .product-overlay {
+  display:block;
+  height:100%;
+}
+
+
+.product-overlay .overlay-content {
+  bottom: 0;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+}
+
+.product-overlay .add-to-cart {
+  background:#fff;
+  border: 0 none;
+  border-radius: 0;
+  color: #D7142F;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  margin-bottom: 25px;
+}
+
+.product-overlay .add-to-cart:hover {
+  background:#fff;
+  color: #D7142F;
+}
+
+
+.product-overlay p{
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+}
+
+</style>
+	<section>
+		<div class="container">
+			<div class="row">
+						
+				<div class="col-sm-12 padding-right">
+					<div class="features_items"><!--features_items-->
+					
+					#{list items:listaProdutos, as:'product'}
+					<div class="col-sm-3">
+						 <div class="ibox-content product-box ">
+								<div class="single-products">
+									<div class="productinfo">
+										<img width="100%" src="${product.pro_caminho_ima_thumb}" alt="" />
+									</div>
+									  <div class="product-desc">
+										<h3 style="color: red;">R$ ${product.pro_preco}</h3>
+										<p>${product.pro_marca}</p>
+										<p>${product.pro_referencia}</p>
+										<div class="fb-share-button"
+								data-href="http://comprasdovale.com.br/application/productdetails?codigo=${product?.pro_codigo}&parceiro=${user.usu_codigo}"
+								data-layout="button_count"></div>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+						#{/list}
+					</div><!--features_items-->
+					
+					
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1095799413776868',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+	

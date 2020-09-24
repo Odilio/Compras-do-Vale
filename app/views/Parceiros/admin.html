@@ -1,0 +1,107 @@
+#{extends 'templateParceiro.html'/}
+
+	<section>
+		<div class="container">
+			<div class="row">
+				
+			
+				<div class="col-sm-12 padding-right">
+				
+				 <div class="wrapper wrapper-content">
+					
+					<div class="row">
+     			   <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <span class="label label-info pull-right">Atual</span>
+                                <h5>Produtos</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">${qtdProdutos}</h1>
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <span class="label label-info pull-right">Atual</span>
+                                <h5>Saldo a Receber</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 style="color:green" class="no-margins">${valorAReceber}</h1>
+                             
+                            </div>
+                        </div>
+                    </div>
+                  
+                     <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <span class="label label-info pull-right">Atual</span>
+                                <h5>Valor Recebido</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">${valorRecebido}</h1>
+                               
+                            </div>
+                        </div>
+                    </div>
+</div>
+
+      <div class="row">
+     			  
+                       <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                            <span class="label label-info pull-right">Atual</span>
+                                <h5>Valor Total</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">${valorTotal}</h1>
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <span class="label label-info pull-right">Atual</span>
+                                <h5>Itens Pedidos</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">${qtdPedidos}</h1>
+                             
+                            </div>
+                        </div>
+                    </div>
+                  
+                     <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                            <span class="label label-info pull-right">Atual</span>
+                                <h5>Estoque de Itens</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">${quantidade}</h1>
+                               
+                            </div>
+                        </div>
+                    </div>
+</div>
+
+
+				</div><!--features_items-->
+					
+					<div class="category-tab"><!--category-tab-->
+					 		<a class="btn btn-default" href="@{Parceiros.editarperfil()}">Editar Perfil</a>
+					</div><!--/category-tab-->
+					
+				
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+	

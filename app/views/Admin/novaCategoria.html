@@ -1,0 +1,69 @@
+#{extends 'templateAdmin.html'/}
+
+<div class="container">
+	<div class="row">
+	           <div class="col-sm-9 padding-right">
+                <div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-9"><h2> &{'Categorias'}</h2>		</div></div>
+                     
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+ <table class="table table-hover">
+ <thead>
+     <tr >
+     <th>&{'Titulo'}</th>
+     <th>&{'Editar'}</th>
+	 <th>&{'configuracoes'}</th>
+     </tr>
+</thead>
+<tbody class="animsition">   
+ 
+  #{list items:categorias, as:'product'}
+            <tr>
+		<td class="project-title">
+  			<a data-toggle="tooltip" title="&{'tooltipOpen'}" class="animsition-link" href="" >${product?.cat_nome}  </a>
+  		 </td>
+  <td >
+  	 	<a href="#cadastro" class="btn btn-white btn-sm announce"  data-titulo="${product.cat_nome}" data-codigo="${product.cat_codigo}" data-toggle="tooltip"  ><i class="fa fa-pencil-square-o fa-2x"></i> Edit </a>
+  	 </td>
+  	 	<td class="project-title">
+  			<a data-toggle="tooltip" title="&{'tooltipOpen'}" class="animsition-link" href="" ><i class="fa fa-cog fa-2x"></i> </a>
+  		 </td>
+  	 </tr>    
+               #{/list}
+ 	 </tbody>
+  		</table>
+ 	<form data-persist="garlic" action="@{Admin.addCategoria()}"  enctype="multipart/form-data" method="post" id="formpro">
+ 	<input type="hidden"  id="inp" name="categoria.pro_codigo" value="${projeto}"/>
+ 	
+ 	<input type="hidden"  id="cat_codigo" name="categoria.cat_codigo" value="${categoria?.cat_codigo}"/>
+   <h4> &{'titulo'}  </h4>
+    	<input placeholder="&{'tituloCategoria'}" required minlength="2" class="form-control" type="text"  id="titulo" value="${categoria?.cat_nome}" name="categoria.cat_nome"/></fieldset>
+      <br>
+ 	
+	 <input type="submit" id="criar" value="&{'salvar'}" class="btn btn-default" ></input>
+		</form> 
+	
+	<br>
+</div></div></div></div></div>
+	
+
+
+ <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js" ></script>
+ <script>
+$("#formpro").validate();
+</script>
+<script>
+$(document).ready(function(){
+	   $(".announce").click(function(){ 
+	     
+	     $("#cat_codigo").val($(this).data('codigo'));
+	     $("#titulo").val($(this).data('titulo'));
+	     $("#subtitulo").val($(this).data('subtitulo'));
+	     document.getElementById("uploadPreview1").src =  $(this).data('imagem');
+	     CKEDITOR.instances.editor1.setData( $(this).data('resumo') );
+	   
+	   });
+	});
+
+</script> 

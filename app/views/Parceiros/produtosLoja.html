@@ -1,0 +1,167 @@
+#{extends 'templateParceiro.html'/}
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<style>
+.fb-profile{
+    height:50%;
+    width: 100%;  
+}
+.fb-profile img.fb-image-lg{
+    height:50%;
+    width: 100%;  
+    margin-bottom: 10px;
+}
+
+.fb-image-profile
+{
+    margin: -90px 10px 0px 50px;
+    z-index: 9;
+    width: 20%; 
+}
+
+@media (max-width:768px)
+{
+    
+.fb-profile-text>h1{
+    font-weight: 700;
+    font-size:16px;
+}
+
+.fb-image-profile
+{
+    margin: -45px 10px 0px 25px;
+    z-index: 9;
+    width: 20%; 
+}
+}
+.margin {
+	margin-top: 40px;
+}
+
+.marg{
+margin-top: 8%;
+}
+
+.branco {
+	background-color: #EEE;
+}
+
+.img {
+    float:left;
+    margin:0 20px 10px 0;
+  }
+  
+.col-sm-9, .col-sm-3 {
+	position: relative;
+	min-height: 1px;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+.col-sm-12{
+padding-top: 2%;
+}
+</style>
+
+<div>
+	
+	</div>
+
+	<section>
+	 <div class="row">
+
+	 </div>
+		<div class="container margin corfundo">
+			<div class="row">
+					
+				<div class="col-sm-12">
+					<div class="features_items"><!--features_items-->
+					
+					
+					#{paginate.list items:listaProdutos, as:'product'} 
+					<div class="col-md-3">
+                    <div class="ibox">
+                        <div class="ibox-content product-box ">
+   <a data-toggle="modal" data-titulo="${product.pro_titulo_reduzido}" data-categoria="${product.pro_categoria}" data-premio="${product.pro_valor_premio}" data-codigo="${product.pro_codigo}" data-produtor="${product.pro_cod_produtor}" data-imagem="${product.pro_caminho_ima_thumb}" data-preco="${product.pro_preco}" class="product-name">
+                            <div class="productinfo">
+                               	<img src="${product.pro_caminho_ima_thumb}" alt="" />
+                            </div>
+                            <div class="product-desc">
+                                <span class="product-price">
+                                  R$ ${product.pro_preco}
+                                </span>
+                                 <span class="product-price-gain">
+                                  R$ ${product.pro_valor_premio}
+                                </span>
+                                <small class="text-muted">${product.pro_categoria}</small>
+                                <a class="product-name"> ${product.pro_titulo_reduzido}</a>
+          						
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+						  #{/paginate.list} 
+						 
+					</div><!--features_items-->
+					<center> #{paginate.controls items:listaProdutos /}   </center> 
+				
+				
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+<div id="modalConfirm" class="modal fade">
+
+		<div class="modal-dialog">
+
+			<div class="modal-content col-sm-10">
+				<div class="modal-header">
+					<a href="#" class="close">&times;</a>
+					<h3>Adiconar Produto a Loja</h3>
+				</div>
+				<div class="modal-body">
+					<p>Você pode consultar os itens adicionados em Minha Loja.</p>
+					<p>Deseja confirmar esta operação?</p>
+					<p id="debug-url"></p>
+				</div>
+				<div class="modal-footer">
+
+					<form class="form-horizontal" role="form"
+						action="@{Parceiros.addProdutoLola()}">
+						<input type="hidden" id="pro_codigo" name="produtoloja.pro_cod_produto" />
+						<input type="hidden" id="pro_produtor" name="produtoloja.pro_cod_produtor" />
+						<input type="hidden" id="pro_imagem" name="produtoloja.pro_caminho_ima_thumb" />
+						<input type="hidden" id="pro_preco" name="produtoloja.pro_preco" />
+						<input type="hidden" id="pro_titulo" name="produtoloja.pro_titulo_reduzido" />
+						<input type="hidden" id="pro_categoria" name="produtoloja.pro_categoria" />
+						<input type="hidden" id="pro_premio" name="produtoloja.pro_valor_premio" />
+						<input type="submit" id="send" name="send" value="Sim" class="btn danger">
+						<a href="#" data-dismiss="modal" class="btn secondary">Não</a>
+					</form>
+					
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+			
+			$(document).ready(function(){
+				
+				   $(".product-name").click(function(){ 
+				 	   
+					     $("#pro_codigo").val($(this).data('codigo'));
+					     $("#pro_produtor").val($(this).data('produtor'));
+					     $("#pro_imagem").val($(this).data('imagem'));
+					     $("#pro_preco").val($(this).data('preco'));
+					     $("#pro_titulo").val($(this).data('titulo'));
+					     $("#pro_categoria").val($(this).data('categoria'));
+					     $("#pro_premio").val($(this).data('premio'));
+					     $('#modalConfirm').modal('show');
+					   });
+				   
+				});
+			
+</script>

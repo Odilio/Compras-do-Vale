@@ -1,0 +1,135 @@
+
+#{extends 'templateAdmin.html'/}
+
+<style>
+.ibox-title {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+     border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 4px 0px 0;
+    color: inherit;
+    margin-bottom: 0;
+    padding: 14px 15px 7px;
+    min-height: 48px;
+}
+
+    .ibox {
+    clear: both;
+    margin-bottom: 25px;
+    margin-top: 0;
+    padding: 0;
+}
+
+</style>
+ <div class="row">
+                <div class="col-lg-10">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="ibox-title">
+<h1>Cliente </h1>
+   <div class="row">
+            <div class="col-lg-9">
+                <div class="wrapper wrapper-content animated fadeInUp">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                        
+						<div class="bill-to">
+							
+							   <div class="row">
+                                <div class="col-lg-10">
+                                    <dl class="dl-horizontal">
+
+                                        <dt>CODIGO PEDIDO:</dt> <dd>${endereco?.end_codigo}</dd>
+									<dt>NOME DO CLIENTE:</dt><dd>${endereco?.end_nome}</dd>
+									<dt>EMAIL DO CLIENTE:</dt><dd>	${endereco?.end_email}</dd>
+									<dt>ENDEREÇO DO CLIENTE:</dt><dd>	${endereco?.end_endereco1}</dd>
+									<dt>COMPLEMENTO:</dt><dd>${endereco?.end_endereco2}</dd>
+									
+								</dl>
+							</div>
+							</div>
+							 <div class="row">
+                                <div class="col-lg-10">
+                                 <dl class="dl-horizontal">
+
+													<dt>CEP:</dt>
+													<dd>${endereco?.end_cep}</dd>
+													<dt>PAÍS:</dt>
+													<dd>Brasil</dd>
+													<dt>ESTADO:</dt>
+													<dd>${endereco?.end_estado}</dd>
+													<dt>CELULAR:</dt>
+													<dd>${endereco?.end_celular}</dd>
+												</dl>
+								
+							</div>
+						</div>
+						
+					</div>
+                                                          
+                       
+                    </div>
+                </div>
+            </div></div>
+
+</div>
+ <div class="row wrapper wrapper-content">
+				 	 <div class="ibox-title">
+                            <h5>Pedidos do Cliente </h5>
+                           
+                        </div>
+   <div class="ibox-content">
+				<table class="table table-hover no-margins">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Codigo Pedido</td>
+								<td class="image">Item</td>
+							<td class="price">Referencia</td>
+							<td class="price">Preço</td>
+							<td class="quantity">Quantidade</td>
+							<td class="total">Status</td>
+							
+							<td class="total">Ir para Item</td>
+						
+						</tr>
+					</thead>
+					<tbody>
+							#{paginate.list items:cart, as:'product'} 
+						<tr>
+							<td class="cart_price">
+								<p  style="color: red;"> ${product?.ped_codigo}</p>
+							</td>
+							<td>
+								<a href=""><img src="${product?.car_caminho_ima}" width="80px" alt=""></a>
+							</td>
+							<td >
+								<h4><a href="">${product?.car_codigo}</a></h4>
+								<p>Referência: ${product?.car_referencia}</p>
+							</td>
+						
+							<td >
+								<p  style="color: red;"> ${product?.car_preco}</p>
+							</td>
+							<td class="cart_quantity">
+						     	<p>${product?.car_quantidade}</p>
+						    </td>
+							<td >
+								<p id ="status"> ${product?.car_status}</p>
+							</td>
+								
+							<td>
+								<a class="cart_quantity_delete" href="@{Admin.productDetails(product.pro_codigo)}"><i class="fa fa-search"></i></a>
+							</td>
+							
+						</tr>
+						    #{/paginate.list}
+					</tbody>
+				</table>
+				 #{paginate.controls items:cart /} 
+			</div>
+				</div>
+
+</div></div></div></div>

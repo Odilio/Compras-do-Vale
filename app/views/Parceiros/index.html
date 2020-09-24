@@ -1,0 +1,225 @@
+#{extends 'templateAdmin.html'/}
+
+	<section>
+		<div class="container">
+			<div class="row">
+					
+			
+				<div class="col-sm-12 padding-right">
+				
+				 <div class="wrapper wrapper-content">
+					
+					<div class="row">
+     			   <div class="col-lg-3">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <span class="label label-info pull-right">Atual</span>
+                                <h5>Produtos</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">${qtdProdutos}</h1>
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <span class="label label-info pull-right">Atual</span>
+                                <h5>Usuarios</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">${qtdUsuarios}</h1>
+                             
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                            <span class="label label-info pull-right">Atual</span>
+                                <h5>Categorias</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">${qtdCategorias}</h1>
+                               
+                            </div>
+                        </div>
+                    </div>
+                       <div class="col-lg-3">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                            <span class="label label-info pull-right">Atual</span>
+                                <h5>Valor Total</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">${valorTotal}</h1>
+                               
+                            </div>
+                        </div>
+                    </div>
+</div>
+
+    <div class="ibox-content">
+				<table class="table table-hover no-margins">
+					<thead>
+						<tr class="cart_menu">
+						<td class="image"></td>
+							<td class="image">Pedidos</td>
+							
+							<td class="price">Preço</td>
+							<td class="quantity">Quantidade</td>
+							<td class="total">Status</td>
+							<td class="Usuario">Comprador</td>
+							<td class="description">Data</td>
+							<td class="total">Itens</td>
+						
+						</tr>
+					</thead>
+					<tbody>
+							#{paginate.list items:pedidos, as:'product'} 
+						<tr>
+						
+							<td class="cart_price">
+								<form id="myForm">
+								<input name="radioName" id="${product?.ped_codigo}"  value="${product?.ped_codigo}" type="checkbox">
+								</form>
+							</td>
+							
+							<td class="cart_description">
+								<h4><a href="">${product?.ped_estado}</a></h4>
+								<p>Referência: ${product?.ped_codigo}</p>
+							</td>
+						
+							
+						
+							<td class="cart_price">
+								<p  style="color: red;"> ${product?.ped_valor}</p>
+							</td>
+							<td class="cart_quantity">
+							<div class=" cart_quantity_button">
+								
+									<p  style="color: red;">${product?.ped_quantidade}</p>
+								
+							</div>
+						</td>
+							<td >
+								<p id ="status"> ${product?.ped_status}</p>
+							</td>
+								<td >
+								 ${product?.ped_nome_usuario}
+							</td>
+							<td >
+								 ${product?.ped_data}
+							</td>
+							<td>
+								<a class="cart_quantity_delete" href="@{Admin.itensPedidos(product.ped_codigo)}"><i class="fa fa-search"></i></a>
+							</td>
+							
+						</tr>
+						    #{/paginate.list}
+					</tbody>
+				</table>
+				 #{paginate.controls items:pedidos /} 
+			</div>
+
+
+<div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Vendas Por Mês </h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#">Config option 1</a>
+                                </li>
+                                <li><a href="#">Config option 2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+
+                           
+            <div style="width:100%">
+			<div>
+				<canvas id="canvas" height="250" width="700"></canvas>
+			</div>
+		</div>
+
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            
+       
+
+	
+				</div><!--features_items-->
+					
+					<div class="category-tab"><!--category-tab-->
+					 		
+					</div><!--/category-tab-->
+					
+				
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script	src="@{'/public/javascripts/Chart.js'}"></script>
+	<script>
+		var randomScalingFactor = function(){ return Math.round(Math.random()*1)};
+		var lineChartData = {
+			labels : ["Janeiro","Fevereiro","Marco","Abril","Maio","Junho","Julho"],
+			datasets : [
+				{
+					label: "My First dataset",
+					fillColor : "rgba(220,220,220,0.2)",
+					strokeColor : "rgba(220,220,220,1)",
+					pointColor : "rgba(220,220,220,1)",
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(220,220,220,1)",
+					data : [${qtdPedidos},${qtdUsuarios},${qtdCategorias},randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+				},
+				{
+					label: "My Second dataset",
+					fillColor : "rgba(151,187,205,0.2)",
+					strokeColor : "rgba(151,187,205,1)",
+					pointColor : "rgba(151,187,205,1)",
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(151,187,205,1)",
+					data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+				}
+			]
+
+		}
+
+	window.onload = function(){
+		var ctx = document.getElementById("canvas").getContext("2d");
+		window.myLine = new Chart(ctx).Line(lineChartData, {
+			responsive: true
+		});
+	}
+
+
+		$.post( "http://www.tobesunglasses.com.br/admin/addItemPedido", { rev_texto: "BM262C1", pro_quantidade: "2" })
+		  .done(function( data ) {
+		   
+		  });
+		
+	</script>
+	
+	

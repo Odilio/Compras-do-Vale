@@ -1,0 +1,25 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                                       Application.index
+
+GET     /produto/codigo={codigo}                    Application.productDetails
+GET     /parceiro={parceiro}                      Application.parceiro
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/                                staticDir:public
+GET     /robots.txt                             staticFile:public/robots.txt
+GET     /sitemap.xml                            staticFile:public/sitemap.xml  
+GET     /google0dda0efa76289a65.html            staticFile:public/google0dda0efa76289a65.html 
+
+# Catch all
+*       /{controller}/{action}                  {controller}.{action}
+
+
+GET     /frete.json                             Application.calcularFrete
+GET     /bars.json                              Produtos.calcularFrete

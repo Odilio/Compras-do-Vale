@@ -1,0 +1,90 @@
+#{extends 'templateAdmin.html'/}
+
+
+	
+<section id="cart_items">
+		<div class="container">
+			<div class="row">
+					
+					
+				<div class="col-sm-9 padding-right">
+				<div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-9">
+                    <h2>	ADMIN</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="@{Admin.admin()}">Home</a>
+                        </li>
+                       <li>
+                            <a href="@{Admin.listaClientes()}">Mercadorias por deposito</a>
+                        </li>
+                      
+                    </ol>
+                </div>
+            </div>
+				 <div class="wrapper wrapper-content">
+				  <div class="ibox-title">
+                            <h5>Mercadorias por deposito  </h5>
+                           
+                        </div>
+                        
+   <div class="ibox-content">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td >Item</td>
+							<td >Referencia</td>
+							<td >Codigo Item</td>
+							<td >Quantidade</td>
+							<td >Deposito</td>
+							<td>Movimentações</td>
+							<td >Ver Item</td>
+						</tr>
+					</thead>
+					<tbody>
+						#{paginate.list items:listaProdutos, as:'product'} 
+						<tr>
+							<td >
+								<a href="">${product?.dpm_codigo}</a>
+							</td>
+							
+							<td >
+								<h4><a href=""></a></h4>
+								<p>Referência: ${product?.dpm_referencia}</p>
+							</td>
+							<td >
+								<p  style="color: red;"> ${product?.dpm_codigo_mercadoria}</p>
+							</td>
+							<td >
+								
+									<p >${product?.dpm_quantidade}</p>
+							
+							</td>
+							<td class="cart_total">
+								
+  							  ${product?.dpm_cod_deposito}
+							</td>
+							<td class="cart_delete">
+								<a class="cart_quantity_delete" href="@{admin.movimentacoes(product.dpm_codigo_mercadoria)}"><i class="fa fa-check-square"></i></a>
+							</td>
+							<td class="cart_delete">
+								<a class="cart_quantity_delete" href="@{admin.productDetails(product.dpm_codigo_mercadoria)}"><i class="fa fa-check-square"></i></a>
+							</td>
+						</tr>
+						  #{/paginate.list} 
+					</tbody>
+				</table>
+				 #{paginate.controls items:listaProdutos /} 
+			</div>
+				</div><!--features_items-->
+					
+					<div class="category-tab"><!--category-tab-->
+					 		
+					</div><!--/category-tab-->
+					
+				
+				</div>
+			</div>
+		</div>
+	</section>
+

@@ -1,0 +1,137 @@
+
+#{extends 'templateAdmin.html'/}
+
+<style>
+.ibox-title {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+     border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 4px 0px 0;
+    color: inherit;
+    margin-bottom: 0;
+    padding: 14px 15px 7px;
+    min-height: 48px;
+}
+
+    .ibox {
+    clear: both;
+    margin-bottom: 25px;
+    margin-top: 0;
+    padding: 0;
+}
+
+</style>
+ <div class="row">
+                <div class="col-lg-10">
+                    <div class="col-md-9 col-md-offset-2">
+                        <div class="ibox-title">
+<h1>Cliente </h1>
+   <div class="row">
+            <div class="col-lg-9">
+                <div class="wrapper wrapper-content animated fadeInUp">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                        
+						<div class="bill-to">
+							
+							   <div class="row">
+                                <div class="col-lg-10">
+                                    <dl class="dl-horizontal">
+
+									<dt>NOME DO CLIENTE:</dt><dd>${endereco?.end_nome}</dd>
+									<dt>EMAIL DO CLIENTE:</dt><dd>	${endereco?.end_email}</dd>
+									<dt>ENDEREÇO DO CLIENTE:</dt><dd>	${endereco?.end_endereco1}</dd>
+									<dt>COMPLEMENTO:</dt><dd>${endereco?.end_endereco2}</dd>
+										<dt>CEP:</dt>
+													<dd>${endereco?.end_cep}</dd>
+													<dt>PAÍS:</dt>
+													<dd>Brasil</dd>
+													<dt>ESTADO:</dt>
+													<dd>${endereco?.end_estado}</dd>
+													<dt>CELULAR:</dt>
+													<dd>${endereco?.end_celular}</dd>
+								</dl>
+							</div>
+							</div>
+							 
+					</div>
+                                                          
+                       
+                    </div>
+                </div>
+            </div></div>
+
+</div>
+ <div class="row wrapper wrapper-content">
+				 	 <div class="ibox-title">
+                            <h5>Pedidos do Cliente </h5>
+                           
+                        </div>
+   <div class="ibox-content">
+				<table class="table table-hover no-margins">
+					<thead>
+						<td class="image"></td>
+							<td class="image">Pedidos</td>
+							
+							<td class="price">Preço</td>
+							<td class="quantity">Quantidade</td>
+							<td class="total">Status</td>
+							<td class="total">Frete</td>
+							<td class="description">Data</td>
+							<td class="total">Detalhes</td>
+						
+						</tr>
+					</thead>
+					<tbody>
+							#{paginate.list items:pedidos, as:'product'} 
+							<tr>
+						
+							<td class="cart_price">
+								<form id="myForm">
+								<input name="radioName" id="${product?.ped_codigo}"  value="${product?.ped_codigo}" type="checkbox">
+								</form>
+							</td>
+							
+							<td class="cart_description">
+								<h4><a href="">${product?.ped_estado}</a></h4>
+								<p>Codigo: ${product?.ped_codigo}</p>
+							</td>
+						
+							
+						
+							<td class="cart_price">
+								<p  style="color: red;"> ${product?.ped_valor}</p>
+							</td>
+							<td class="cart_quantity">
+							<div class=" cart_quantity_button">
+								
+									<p >${product?.ped_quantidade}</p>
+								
+							</div>
+						</td>
+							<td >
+								<p  class="${product?.ped_status =~ "Aguardando" ? 'label label-primary' : 'label label-danger'}"> ${product?.ped_status}</p>
+							</td>
+							<td >
+								<p id ="frete"> ${product?.ped_tipo_frete}</p>
+							</td>
+							<td >
+								 ${product?.ped_data}
+							</td>
+							<td>
+								<a class="cart_quantity_delete" href="@{Admin.mostrarPedido(product.ped_codigo)}"><i class="fa fa-search"></i></a>
+							</td>
+							
+						</tr>
+						    #{/paginate.list}
+					</tbody>
+				</table>
+				 #{paginate.controls items:cart /} 
+			</div>
+				</div>
+
+</div></div></div></div>

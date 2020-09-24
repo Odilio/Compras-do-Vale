@@ -1,0 +1,30 @@
+<html>
+<head>
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro|Open+Sans+Condensed:300|Raleway' rel='stylesheet' type='text/css'>
+<!-- Include JS File Here -->
+<link href="style.css" rel="stylesheet"/>
+<!-- Include JS File Here -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+	$.post( "http://www.tobesunglasses.com.br/admin/addItemPedido", { rev_texto: "BM262C1", pro_quantidade: "2" })
+		  .done(function( data ) {
+		    alert( "Data Loaded: " + data.car_quantidade );
+		  });
+
+
+</script>
+</head>
+<body>
+<div id="main">
+<h2>jQuery Ajax $.post() Method</h2>
+<hr>
+<form id="form" method="post">
+<div id="namediv"><label>Name</label>
+<input type="text" name="name" id="name" placeholder="Name"/><br></div>
+<div id="emaildiv"><label>Email</label>
+<input type="text" name="email" id="email" placeholder="Email"/></div>
+</form>
+<button id="btn">Send Data</button>
+</div>
+</body>
+</html>

@@ -1,0 +1,235 @@
+#{extends 'template.html'/}
+   <link href="@{'/public/stylesheets/slider.css'}" media="all"
+	rel="stylesheet">
+		<style>
+	.margin{
+	margin-top: 40px;
+	}
+
+	.branco {
+ background-color: #fff;
+ }
+ .col-sm-9 , .col-sm-3 {
+    position: relative;
+    min-height: 1px;
+     padding-right: 0px; 
+   padding-left: 0px; 
+}
+ 
+	</style>
+ 
+	
+	
+<div class="container">
+
+
+	#{include 'menu.html'/}
+
+<div class="col-sm-9 branco">	
+
+</div>
+</div>
+
+	<section>
+		<div class="container margin branco">
+			<div class="row">
+				
+			
+				
+				<div class="col-sm-12 padding-right">
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">Principal</h2>
+						
+						
+					
+					#{paginate.list items:listaProdutos, as:'product'} 
+					<div class="col-md-3">
+                    <div class="ibox">
+                        <div class="ibox-content product-box ">
+ <a href="@{Application.productDetails(product.pro_codigo)}" class="product-name">
+                            <div class="productinfo">
+                               	<img src="${product.pro_caminho_ima}" alt="" />
+                            </div>
+                            <div class="product-desc">
+                                <span class="product-price">
+                                  R$ ${product.pro_preco}
+                                </span>
+                                <small class="text-muted">${product.pro_categoria}</small>
+                                <a href="@{Application.productDetails(product.pro_codigo)}" class="product-name"> ${product.pro_titulo}</a>
+          
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+						  #{/paginate.list} 
+						 
+					</div><!--features_items-->
+					<center> #{paginate.controls items:listaProdutos /}   </center> 
+					<div class="category-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#tshirt" data-toggle="tab">Masculino</a></li>
+								<li><a href="#blazers" data-toggle="tab">Feminino</a></li>
+								<li><a href="#sunglass" data-toggle="tab">Unisex</a></li>
+								
+								
+							</ul>
+						</div>
+						<div class="tab-content">
+							<div class="tab-pane fade active in" id="tshirt" >
+								 #{list items:produtosUnisex, as:'product'}
+									<div class="col-md-3">
+                    <div class="ibox">
+                        <div class="ibox-content product-box active">
+ <a href="@{Application.productDetails(product.pro_codigo)}" class="product-name">
+                            <div class="productinfo">
+                               	<img src="${product.pro_caminho_ima}" alt="" />
+                            </div>
+                            <div class="product-desc">
+                                <span class="product-price">
+                                  R$ ${product.pro_preco}
+                                </span>
+                                <small class="text-muted">${product.pro_categoria}</small>
+                                <a href="@{Application.productDetails(product.pro_codigo)}" class="product-name"> ${product.pro_titulo}</a>
+
+                              
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+								  #{/list} 
+							
+						    
+
+
+
+							</div>
+							
+							<div class="tab-pane fade  in" id="blazers" >
+								 #{list items:produtosUnisex, as:'product'}
+										<div class="col-md-3">
+                    <div class="ibox">
+                        <div class="ibox-content product-box active">
+ <a href="@{Application.productDetails(product.pro_codigo)}" class="product-name">
+                            <div class="productinfo">
+                               	<img src="${product.pro_caminho_ima}" alt="" />
+                            </div>
+                            <div class="product-desc">
+                                <span class="product-price">
+                                  R$ ${product.pro_preco}
+                                </span>
+                                <small class="text-muted">${product.pro_categoria}</small>
+                                <a href="@{Application.productDetails(product.pro_codigo)}" class="product-name"> ${product.pro_titulo}</a>
+
+                              
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+								  #{/list} 
+							</div>
+								
+								<div class="tab-pane fade  in" id="sunglass" >
+							 #{list items:produtosUnisex, as:'product'}
+										<div class="col-md-3">
+                    <div class="ibox">
+                        <div class="ibox-content product-box active">
+ <a href="@{Application.productDetails(product.pro_codigo)}" class="product-name">
+                            <div class="productinfo">
+                               	<img src="${product.pro_caminho_ima}" alt="" />
+                            </div>
+                            <div class="product-desc">
+                                <span class="product-price">
+                                  R$ ${product.pro_preco}
+                                </span>
+                                <small class="text-muted">${product.pro_categoria}</small>
+                                <a href="@{Application.productDetails(product.pro_codigo)}" class="product-name"> ${product.pro_titulo}</a>
+
+                              
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+								  #{/list} 
+							</div>
+							
+					
+							
+						</div>
+					</div><!--/category-tab-->
+					
+					<div class="recommended_items"><!--recommended_items-->
+						<h2 class="title text-center">Oculos mais recomendados</h2>
+						
+						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner">
+								<div class="item active">	
+									#{list items:maisVendidos, as:'product'} 
+									<div class="col-md-3">
+                    <div class="ibox">
+                        <div class="ibox-content product-box active">
+ <a href="@{Application.productDetails(product.pro_codigo)}" class="product-name">
+                            <div class="productinfo">
+                               	<img src="${product.pro_caminho_ima}" alt="" />
+                            </div>
+                            <div class="product-desc">
+                                <span class="product-price">
+                                  R$ ${product.pro_preco}
+                                </span>
+                                <small class="text-muted">${product.pro_categoria}</small>
+                                <a href="@{Application.productDetails(product.pro_codigo)}" class="product-name"> ${product.pro_titulo}</a>
+
+                              
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+									  #{/list} 
+									    
+								</div>
+							
+							</div>
+										
+						</div>
+					</div><!--/recommended_items-->
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+<script>
+$('#slider1').bxSlider({
+	  mode: 'fade',
+	  auto: true,
+	  autoControls: true,
+	  pause: 2000
+	});
+	
+$('.carousel').carousel();
+</script>
+	<!--  <script type = "text/javascript">
+
+ 
+	 $(document).ready(function() {
+		 var backgrounds = [
+		                    "8px solid rgb(64, 184, 210)", 
+		                    "8px solid rgb(227, 12, 142)",
+		                    "8px solid #FF742C"];
+		 var current = 0;
+		 function nextBackground() {
+			 $(".category-products").css("border", 
+		        backgrounds[current = ++current % backgrounds.length]);
+
+		        setTimeout(nextBackground, 1000);
+		    }
+		    setTimeout(nextBackground, 1000);
+    $(".category-products").css("border", backgrounds[1]);
+	 });
+      </script> -->

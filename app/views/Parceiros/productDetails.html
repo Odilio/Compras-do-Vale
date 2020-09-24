@@ -1,0 +1,87 @@
+#{extends 'templateParceiro.html'/}
+<style>
+.etalage_source_image{
+width:200px;
+height:200px;
+
+}
+</style>
+	
+	<section>
+		<div class="container">
+	
+			<div class="row ibox-content">
+				
+				<div class="col-sm-12 padding-right">
+					<div class="product-details"><!--product-details-->
+						<div class="col-sm-5">
+							 <div class="details-left-slider">
+						  <ul id="etalage">
+							 <li>
+								<a href="">
+							
+								<img class="etalage_source_image" src="${produto.pro_caminho_ima}" />
+								</a>
+							 </li>
+							 <li>
+						
+								<img class="etalage_source_image" src="${produto.pro_caminho_ima2}" />
+							 </li>
+							 <li>
+							
+								<img class="etalage_source_image" src="${produto.pro_caminho_ima3}" />
+							 </li>
+							
+							
+						 </ul>
+					 </div>
+
+						</div>
+						<div class="col-sm-7">
+							<div class="product-information "><!--/product-information-->
+								<div class="col-sm-8 ">
+								<h2>${produto.pro_titulo}</h2>
+								<p><b>Referencia:</b> ${produto.pro_referencia}</p>
+								<p><b>Codigo:</b> ${produto.pro_codigo}</p>
+									<span>
+								
+									<b>Preço:</b><span>R$ ${produto?.pro_preco}</span>
+									<br>
+									
+								
+								
+								</span>
+								<p><b>Espelhado:</b> 
+								<badge class="${produto.pro_espelhado =~ "t" ? 'label label-primary' : 'label label-warning'}">#{if produto.pro_espelhado =~ 't'}&{'sim'}  #{/if}#{else}&{'nao'}#{/else}</badge></p>
+								<p><b>Em estoque:</b> ${produto?.pro_quantidade_estoque}</p>
+								<p><b>Peso:</b> ${produto?.pro_peso}</p>
+								<p><b>Nome do Produtor:</b> ${produto?.pro_nome_produtor}</p>
+								<p><b>Email do Produtor:</b> ${produto?.pro_email_produtor}</p>
+								<p><b>Cor:</b> ${produto?.pro_cor}</p>
+								<p><b>Estilo:</b> ${produto?.pro_estilo}</p>
+								<p><b>Usado:</b> <badge class="${produto.pro_usado =~ "t" ? 'label label-primary' : 'label label-warning'}"> #{if produto.pro_usado =~ 't'}&{'sim'}  #{/if}#{else}&{'nao'}#{/else}</badge></p>
+						
+							</div>
+							
+						</div><!--/product-information-->
+						</div>
+						
+						
+					
+					</div><!--/product-details-->
+					
+				
+					
+				
+					
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	
+	
+	
+
+
+  
